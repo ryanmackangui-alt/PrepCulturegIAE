@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Score IAE Blitz</title>
+<meta name="description" content="Entraînement quotidien à la culture générale du Score IAE-Message : 201 QCM sur l'actualité et les classiques, corrigés inclus.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+html{color-scheme:light dark;}
+img{max-width:100%;}
+[hidden]{display:none !important;}
+:root{
+  --paper:#FAF6EE;
+  --paper-2:#F1EADA;
+  --card:#FFFFFF;
+  --ink:#211E30;
+  --ink-soft:#615C78;
+  --line:#E5DCC6;
+  --accent:#5B3DF0;
+  --accent-ink:#FFFFFF;
+  --accent-soft:#EDE8FE;
+  --good:#178A5C;
+  --good-soft:#E1F4EA;
+  --bad:#D6483A;
+  --bad-soft:#FBE6E2;
+  --gold:#C9861C;
+  --gold-soft:#FBEEDA;
+  --shadow: 0 1px 2px rgba(33,30,48,.04), 0 8px 24px -12px rgba(33,30,48,.18);
+  --radius: 18px;
+  --c-france:#2D63C8; --c-monde:#5B3DF0; --c-eco:#178A5C; --c-histoire:#A15A19;
+  --c-geo:#0E8E8E; --c-sport:#D6483A; --c-culture:#B2378A; --c-sciences:#2E7DBE;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#161421;
+    --paper-2:#1E1B2E;
+    --card:#211E30;
+    --ink:#F1ECE0;
+    --ink-soft:#B3ADC9;
+    --line:#33304A;
+    --accent:#8B7BFF;
+    --accent-ink:#151129;
+    --accent-soft:#2A2450;
+    --good:#4FCB93;
+    --good-soft:#173229;
+    --bad:#F0796A;
+    --bad-soft:#3A2020;
+    --gold:#E7B559;
+    --gold-soft:#3A2E14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    --c-france:#7DA3F5; --c-monde:#B3A4FF; --c-eco:#4FCB93; --c-histoire:#E0A868;
+    --c-geo:#5FD3D3; --c-sport:#F0796A; --c-culture:#E293C6; --c-sciences:#7FBBEB;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#161421;
+  --paper-2:#1E1B2E;
+  --card:#211E30;
+  --ink:#F1ECE0;
+  --ink-soft:#B3ADC9;
+  --line:#33304A;
+  --accent:#8B7BFF;
+  --accent-ink:#151129;
+  --accent-soft:#2A2450;
+  --good:#4FCB93;
+  --good-soft:#173229;
+  --bad:#F0796A;
+  --bad-soft:#3A2020;
+  --gold:#E7B559;
+  --gold-soft:#3A2E14;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  --c-france:#7DA3F5; --c-monde:#B3A4FF; --c-eco:#4FCB93; --c-histoire:#E0A868;
+  --c-geo:#5FD3D3; --c-sport:#F0796A; --c-culture:#E293C6; --c-sciences:#7FBBEB;
+}
+
+*{box-sizing:border-box;}
+html{-webkit-tap-highlight-color:transparent;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Sora",system-ui,-apple-system,sans-serif;
+  padding-inline:16px; padding-block:20px 40px;
+  min-height:100vh;
+}
+.wrap{max-width:640px; margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif; text-wrap:balance; margin:0;}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+
+/* ---------- header ---------- */
+.topbar{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px;}
+.brand{display:flex; align-items:center; gap:10px;}
+.brand-mark{
+  width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(155deg,var(--accent),#8B6CFF);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  box-shadow: var(--shadow);
+}
+.brand-mark svg{width:20px;height:20px;}
+.brand-text h1{font-size:1.28rem; font-weight:700; line-height:1.05;}
+.brand-text p{margin:2px 0 0; font-size:.72rem; color:var(--ink-soft); letter-spacing:.04em; text-transform:uppercase;}
+.theme-toggle{
+  border:1px solid var(--line); background:var(--card); color:var(--ink-soft);
+  width:36px;height:36px;border-radius:10px; display:flex;align-items:center;justify-content:center;
+  cursor:pointer; flex-shrink:0;
+}
+.theme-toggle svg{width:17px;height:17px;}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:16px;}
+.stat{
+  background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:10px 8px; text-align:center; box-shadow:var(--shadow);
+}
+.stat .stat-icon{display:flex;justify-content:center;margin-bottom:4px;}
+.stat .stat-icon svg{width:16px;height:16px;}
+.stat .stat-value{font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:1.15rem; font-variant-numeric:tabular-nums;}
+.stat .stat-label{font-size:.62rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em; margin-top:1px;}
+
+/* ---------- cards / sections ---------- */
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow); padding:18px;
+}
+.section-title{font-size:.68rem; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); font-weight:600; margin:22px 0 8px;}
+.section-title:first-child{margin-top:0;}
+
+.cat-grid{display:flex; flex-wrap:wrap; gap:6px;}
+.cat-chip{
+  display:inline-flex; align-items:center; gap:6px;
+  border-radius:999px; padding:5px 11px 5px 8px; font-size:.72rem; font-weight:600;
+  background:var(--paper-2); color:var(--ink-soft); border:1px solid var(--line);
+}
+.cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.cat-chip b{font-family:"IBM Plex Mono",monospace; color:var(--ink); font-weight:600;}
+
+/* ---------- home actions ---------- */
+.mode-switch{
+  display:flex; background:var(--paper-2); border:1px solid var(--line); border-radius:14px; padding:4px; gap:4px; margin-bottom:14px;
+}
+.mode-btn{
+  flex:1; border:none; background:transparent; color:var(--ink-soft); font-family:inherit; font-weight:600;
+  font-size:.82rem; padding:9px 6px; border-radius:10px; cursor:pointer; display:flex; flex-direction:column; gap:1px; align-items:center;
+}
+.mode-btn small{font-weight:500; font-size:.66rem; opacity:.8;}
+.mode-btn.active{background:var(--card); color:var(--accent); box-shadow:var(--shadow);}
+
+.action-card{
+  border-radius:var(--radius); padding:20px; margin-bottom:12px; position:relative; overflow:hidden;
+  border:1px solid var(--line); cursor:pointer; text-align:left; width:100%; font-family:inherit;
+  display:flex; align-items:center; gap:14px; box-shadow:var(--shadow);
+}
+.action-card.primary{
+  background:linear-gradient(135deg,var(--accent),#8267F5); color:var(--accent-ink); border:none;
+}
+.action-card.secondary{ background:var(--card); color:var(--ink); }
+.action-card:disabled{opacity:.45; cursor:not-allowed;}
+.action-icon{
+  width:44px;height:44px;border-radius:13px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  background:rgba(255,255,255,.22);
+}
+.action-card.secondary .action-icon{background:var(--accent-soft); color:var(--accent);}
+.action-icon svg{width:22px;height:22px;}
+.action-title{font-family:"Fraunces",serif; font-size:1.08rem; font-weight:600; margin:0 0 2px;}
+.action-desc{font-size:.78rem; opacity:.85; margin:0;}
+.action-card.primary .action-desc{opacity:.9;}
+.action-chevron{margin-left:auto; opacity:.6; flex-shrink:0;}
+
+.deck-progress{margin-top:2px;}
+.deck-progress .bar-track{height:6px;border-radius:99px;background:var(--paper-2); overflow:hidden;}
+.deck-progress .bar-fill{height:100%; background:var(--gold); border-radius:99px;}
+.deck-progress p{font-size:.66rem; color:var(--ink-soft); margin:6px 0 0;}
+
+/* ---------- quiz ---------- */
+.quiz-top{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.quiz-progress-track{flex:1; height:8px; border-radius:99px; background:var(--paper-2); overflow:hidden;}
+.quiz-progress-fill{height:100%; background:var(--accent); border-radius:99px; transition:width .25s ease;}
+.quiz-count{font-family:"IBM Plex Mono",monospace; font-size:.78rem; font-weight:600; color:var(--ink-soft); white-space:nowrap;}
+.quiz-timer{
+  font-family:"IBM Plex Mono",monospace; font-size:.78rem; font-weight:600; color:var(--bad);
+  display:flex; align-items:center; gap:4px; white-space:nowrap;
+}
+.quiz-timer svg{width:13px;height:13px;}
+.quiz-timer.ok{color:var(--ink-soft);}
+
+.q-tag{
+  display:inline-flex; align-items:center; gap:6px; font-size:.68rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:.05em; padding:4px 10px; border-radius:99px; margin-bottom:12px; background:var(--paper-2);
+}
+.q-tag .cat-dot{width:7px;height:7px;}
+.q-text{font-family:"Fraunces",serif; font-size:1.28rem; line-height:1.35; font-weight:600; margin:0 0 18px;}
+
+.opt-list{display:flex; flex-direction:column; gap:9px;}
+.opt{
+  display:flex; align-items:center; gap:12px; width:100%; text-align:left; cursor:pointer;
+  border:1.5px solid var(--line); background:var(--card); border-radius:14px; padding:12px 14px;
+  font-family:"Sora",sans-serif; font-size:.94rem; color:var(--ink); transition:border-color .12s, background .12s;
+}
+.opt:active{transform:scale(.995);}
+.opt-bubble{
+  width:26px;height:26px;border-radius:50%; border:2px solid var(--line); flex-shrink:0;
+  display:flex;align-items:center;justify-content:center; font-family:"IBM Plex Mono",monospace; font-size:.78rem; font-weight:600; color:var(--ink-soft);
+}
+.opt.selected{border-color:var(--accent); background:var(--accent-soft);}
+.opt.selected .opt-bubble{border-color:var(--accent); background:var(--accent); color:var(--accent-ink);}
+.opt.correct{border-color:var(--good); background:var(--good-soft);}
+.opt.correct .opt-bubble{border-color:var(--good); background:var(--good); color:#fff;}
+.opt.incorrect{border-color:var(--bad); background:var(--bad-soft);}
+.opt.incorrect .opt-bubble{border-color:var(--bad); background:var(--bad); color:#fff;}
+.opt:disabled{cursor:default;}
+
+.explain{
+  margin-top:14px; padding:13px 15px; border-radius:14px; background:var(--paper-2);
+  border-left:3px solid var(--accent); font-size:.85rem; line-height:1.5; color:var(--ink-soft);
+}
+.explain b{color:var(--ink);}
+
+.quiz-footer{display:flex; gap:10px; margin-top:18px;}
+.btn{
+  font-family:"Sora",sans-serif; font-weight:700; font-size:.92rem; border-radius:13px; border:none;
+  padding:13px 18px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.btn-primary{background:var(--accent); color:var(--accent-ink); flex:1;}
+.btn-primary:disabled{opacity:.4; cursor:not-allowed;}
+.btn-ghost{background:transparent; color:var(--ink-soft); border:1.5px solid var(--line);}
+.btn svg{width:16px;height:16px;}
+
+/* ---------- results ---------- */
+.score-hero{text-align:center; padding:26px 10px 22px;}
+.score-hero .score-num{font-family:"Fraunces",serif; font-size:3.6rem; font-weight:700; line-height:1;}
+.score-hero .score-num span{font-size:1.6rem; color:var(--ink-soft); font-weight:500;}
+.score-hero .score-sub{color:var(--ink-soft); font-size:.86rem; margin-top:6px;}
+.streak-banner{
+  display:flex; align-items:center; gap:10px; background:var(--gold-soft); color:var(--gold);
+  border-radius:14px; padding:12px 15px; font-size:.85rem; font-weight:600; margin:14px 0;
+}
+.streak-banner svg{width:20px;height:20px; flex-shrink:0;}
+
+.catbar-row{display:flex; align-items:center; gap:10px; padding:7px 0;}
+.catbar-label{width:88px; font-size:.74rem; color:var(--ink-soft); flex-shrink:0;}
+.catbar-track{flex:1; height:8px; border-radius:99px; background:var(--paper-2); overflow:hidden;}
+.catbar-fill{height:100%; border-radius:99px;}
+.catbar-frac{width:38px; text-align:right; font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--ink-soft); flex-shrink:0;}
+
+.review-item{border-top:1px solid var(--line); padding:14px 0;}
+.review-item:first-child{border-top:none;}
+.review-q{font-size:.92rem; font-weight:600; margin:0 0 8px; line-height:1.4;}
+.review-opt{display:flex; gap:8px; align-items:flex-start; font-size:.82rem; padding:5px 0; color:var(--ink-soft);}
+.review-opt .opt-bubble{width:20px;height:20px; font-size:.66rem;}
+.review-opt.correct{color:var(--good); font-weight:600;}
+.review-opt.incorrect{color:var(--bad); font-weight:600; text-decoration:line-through; text-decoration-thickness:1.5px;}
+.review-explain{margin-top:8px; font-size:.82rem; color:var(--ink-soft); background:var(--paper-2); padding:10px 12px; border-radius:10px; line-height:1.5;}
+
+.empty-note{text-align:center; color:var(--ink-soft); font-size:.86rem; padding:18px 8px;}
+
+[hidden]{display:none !important;}
+.confirm-overlay{
+  position:fixed; inset:0; background:rgba(20,18,30,.5); display:flex; align-items:center; justify-content:center;
+  padding:24px; z-index:50;
+}
+.confirm-box{background:var(--card); border-radius:18px; padding:20px; max-width:320px; box-shadow:var(--shadow);}
+.confirm-box p{font-size:.88rem; color:var(--ink-soft); margin:6px 0 16px;}
+.confirm-actions{display:flex; gap:8px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" stroke="#fff" stroke-width="1.6"/><path d="M8 9h5M8 13h8M8 17h6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="brand-text">
+        <h1>Score IAE Blitz</h1>
+        <p>Culture générale &middot; entraînement</p>
+      </div>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème" title="Changer de thème">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none"><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7"/></svg>
+    </button>
+  </div>
+
+  <!-- ================= HOME ================= -->
+  <div id="view-home">
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-icon" style="color:var(--gold)">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2c1 3-1 4.5-2.3 6C8 10 7 11.8 7 14a5 5 0 0 0 10 0c0-1.6-.6-2.6-1.4-3.7-.4.9-1 1.4-1.7 1.4.6-2 .2-4-1.9-5.7C11.6 4.8 12 3.4 12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="stat-value mono" id="statStreak">0</div>
+        <div class="stat-label">Jours de suite</div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon" style="color:var(--accent)">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2 14.7 8.6 22 9.2 16.5 13.8 18.2 21 12 17.1 5.8 21 7.5 13.8 2 9.2 9.3 8.6 12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="stat-value mono" id="statBest">0<span style="font-size:.6em;color:var(--ink-soft)">/100</span></div>
+        <div class="stat-label">Meilleur score</div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon" style="color:var(--good)">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
+        <div class="stat-value mono" id="statTests">0</div>
+        <div class="stat-label">Tests passés</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Mode d'entraînement</div>
+      <div class="mode-switch">
+        <button class="mode-btn active" data-mode="bachotage">Bachotage<small>correction immédiate</small></button>
+        <button class="mode-btn" data-mode="examen">Examen<small>45 min &middot; chrono</small></button>
+      </div>
+
+      <button class="action-card primary" id="btnNewTest">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <p class="action-title">Nouveau test &middot; 50 QCM</p>
+          <p class="action-desc">Comme à l'examen : 5 réponses, 1 seule correcte</p>
+        </div>
+        <div class="action-chevron">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+      </button>
+
+      <button class="action-card secondary" id="btnReview">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 20a8 8 0 1 1 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 4v5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <p class="action-title" id="reviewTitle">Réviser mes erreurs</p>
+          <p class="action-desc" id="reviewDesc">Aucune erreur enregistrée pour l'instant</p>
+        </div>
+        <div class="action-chevron" style="color:var(--ink-soft)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+      </button>
+
+      <div class="deck-progress">
+        <div class="bar-track"><div class="bar-fill" id="deckBar" style="width:0%"></div></div>
+        <p id="deckLabel">0 / 201 questions vues dans ce cycle</p>
+      </div>
+    </div>
+
+    <div class="section-title">Banque de questions &middot; 201 QCM</div>
+    <div class="card">
+      <div class="cat-grid" id="catLegend"></div>
+    </div>
+
+  </div>
+
+  <!-- ================= QUIZ ================= -->
+  <div id="view-quiz" hidden>
+    <div class="quiz-top">
+      <div class="quiz-count mono" id="quizCount">1/50</div>
+      <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizProgressFill" style="width:2%"></div></div>
+      <div class="quiz-timer ok" id="quizTimer" hidden>
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="1.7"/><path d="M12 9v4l2.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M10 2h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <span id="quizTimerText">45:00</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="q-tag" id="qTag"><span class="cat-dot"></span><span></span></span>
+      <p class="q-text" id="qText"></p>
+      <div class="opt-list" id="qOptions"></div>
+      <div class="explain" id="qExplain" hidden></div>
+    </div>
+
+    <div class="quiz-footer">
+      <button class="btn btn-ghost" id="btnQuit">Quitter</button>
+      <button class="btn btn-primary" id="btnNext" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <!-- ================= RESULTS ================= -->
+  <div id="view-results" hidden>
+    <div class="card score-hero">
+      <div class="score-num mono" id="resScore">0<span>/100</span></div>
+      <p class="score-sub" id="resSub">0 bonnes réponses sur 50</p>
+      <div class="streak-banner" id="streakBanner" hidden>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2c1 3-1 4.5-2.3 6C8 10 7 11.8 7 14a5 5 0 0 0 10 0c0-1.6-.6-2.6-1.4-3.7-.4.9-1 1.4-1.7 1.4.6-2 .2-4-1.9-5.7C11.6 4.8 12 3.4 12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span id="streakText"></span>
+      </div>
+    </div>
+
+    <div class="section-title">Résultat par thème</div>
+    <div class="card" id="catBreakdown"></div>
+
+    <div class="section-title">À revoir &middot; corrigé détaillé</div>
+    <div class="card" id="reviewList"></div>
+
+    <div class="quiz-footer">
+      <button class="btn btn-ghost" id="btnHome2">Accueil</button>
+      <button class="btn btn-primary" id="btnReplay">Nouveau test</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="confirm-overlay" id="confirmOverlay" hidden>
+  <div class="confirm-box">
+    <h3 style="font-size:1.05rem;">Quitter le test ?</h3>
+    <p>Ta progression sur ce test ne sera pas comptabilisée.</p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" id="confirmCancel" style="flex:1">Continuer</button>
+      <button class="btn btn-primary" id="confirmQuit" style="flex:1; background:var(--bad)">Quitter</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [{"cat": "France", "q": "Le 9 juin 2024, à la suite de la déroute de son camp aux élections européennes, Emmanuel Macron annonce une décision institutionnelle majeure. Laquelle ?", "options": ["La démission du gouvernement Attal", "La dissolution de l'Assemblée nationale", "Un référendum sur l'Europe", "Sa propre démission de la présidence", "La nomination d'un gouvernement d'union nationale"], "correct": 1, "exp": "Quelques heures après l'annonce des résultats des élections européennes du 9 juin 2024, marquées par la large victoire du RN, Emmanuel Macron a dissous l'Assemblée nationale et convoqué des élections législatives anticipées.", "id": 1}, {"cat": "France", "q": "Quel bloc politique est arrivé en tête en nombre de sièges à l'issue des élections législatives anticipées de juillet 2024, sans toutefois obtenir la majorité absolue ?", "options": ["Ensemble (majorité présidentielle)", "Le Rassemblement national et ses alliés", "Le Nouveau Front populaire", "Les Républicains", "La France insoumise seule"], "correct": 2, "exp": "À l'issue des deux tours (30 juin et 7 juillet 2024), le Nouveau Front populaire est arrivé en tête avec le plus grand nombre de sièges, devant le bloc central et le RN, mais sans majorité absolue à l'Assemblée.", "id": 2}, {"cat": "France", "q": "Michel Barnier a été nommé Premier ministre le 5 septembre 2024. Combien de temps son gouvernement a-t-il tenu avant d'être renversé par une motion de censure ?", "options": ["Environ 1 mois", "Environ 3 mois", "Environ 6 mois", "Environ 9 mois", "Un peu plus d'un an"], "correct": 1, "exp": "Le gouvernement Barnier, nommé le 5 septembre 2024, a été renversé le 4 décembre 2024 par une motion de censure votée par 331 députés, devenant le gouvernement le plus éphémère de la Ve République.", "id": 3}, {"cat": "France", "q": "Pourquoi le gouvernement de Michel Barnier a-t-il été censuré le 4 décembre 2024 ?", "options": ["Un scandale de corruption personnel", "Le recours au 49.3 sur le projet de budget de la Sécurité sociale", "La démission collective des ministres", "Une défaite aux élections européennes", "Un désaccord sur la politique étrangère"], "correct": 1, "exp": "Michel Barnier avait engagé la responsabilité de son gouvernement via l'article 49.3 sur le budget de la Sécurité sociale ; le RN et le Nouveau Front populaire ont voté conjointement la motion de censure qui l'a renversé.", "id": 4}, {"cat": "France", "q": "Qui Emmanuel Macron a-t-il nommé Premier ministre le 13 décembre 2024, après la chute du gouvernement Barnier ?", "options": ["Gabriel Attal", "Édouard Philippe", "François Bayrou", "Sébastien Lecornu", "Bruno Retailleau"], "correct": 2, "exp": "François Bayrou, président du MoDem, a été nommé Premier ministre le 13 décembre 2024, succédant à Michel Barnier.", "id": 5}, {"cat": "France", "q": "En septembre 2025, François Bayrou a été renversé après avoir engagé son gouvernement sur quel type de vote ?", "options": ["Une motion de censure de l'opposition", "Un vote de confiance qu'il a lui-même sollicité", "Un référendum populaire", "Une question prioritaire de constitutionnalité", "Un vote du Sénat"], "correct": 1, "exp": "François Bayrou a sollicité un vote de confiance sur la question de la dette et du budget, prévu le 8 septembre 2025 ; il a été mis en minorité et son gouvernement est tombé.", "id": 6}, {"cat": "France", "q": "Qui Emmanuel Macron a-t-il nommé Premier ministre le 9 septembre 2025, au lendemain de la chute du gouvernement Bayrou ?", "options": ["Sébastien Lecornu", "Gérald Darmanin", "Roland Lescure", "Bruno Le Maire", "Xavier Bertrand"], "correct": 0, "exp": "Sébastien Lecornu, jusque-là ministre des Armées, a été nommé Premier ministre le 9 septembre 2025, devenant le quatrième chef du gouvernement en un peu plus d'un an.", "id": 7}, {"cat": "France", "q": "En octobre 2025, un épisode inédit de la crise politique française a vu un Premier ministre démissionner :", "options": ["Après un vote de défiance du Sénat", "Quelques heures seulement après avoir formé son gouvernement", "Après une défaite électorale locale", "Pour raisons de santé", "Après une démission collective des ministres"], "correct": 1, "exp": "Sébastien Lecornu a démissionné le 6 octobre 2025, quelques heures à peine après l'annonce de la composition de son premier gouvernement, un fait sans précédent sous la Ve République. Il a été reconduit quelques jours plus tard.", "id": 8}, {"cat": "France", "q": "Le 4 mars 2024, le Congrès réuni à Versailles a inscrit dans la Constitution française :", "options": ["L'interdiction de la peine de mort", "La liberté garantie de recourir à l'interruption volontaire de grossesse", "La parité obligatoire au gouvernement", "Le droit à un environnement préservé", "La primauté du droit européen"], "correct": 1, "exp": "Le Congrès a adopté le 4 mars 2024 la loi constitutionnelle garantissant la liberté de recourir à l'interruption volontaire de grossesse (IVG), une première mondiale.", "id": 9}, {"cat": "France", "q": "Après un incendie dévastateur en 2019, la cathédrale Notre-Dame de Paris a rouvert ses portes en grande pompe. À quelle date a eu lieu la cérémonie de réouverture ?", "options": ["Le 15 avril 2024", "Le 26 juillet 2024", "Le 7 décembre 2024", "Le 1er janvier 2025", "Le 8 mai 2025"], "correct": 2, "exp": "La cérémonie de réouverture de Notre-Dame de Paris s'est tenue le 7 décembre 2024, cinq ans et huit mois après l'incendie du 15 avril 2019, en présence de nombreux chefs d'État.", "id": 10}, {"cat": "France", "q": "La veille de la cérémonie d'ouverture des Jeux olympiques de Paris 2024, le réseau ferroviaire français a été la cible :", "options": ["D'une grève générale des cheminots", "D'actes de sabotage visant plusieurs lignes à grande vitesse", "D'un accident majeur en gare de Lyon", "D'une cyberattaque paralysant les réservations", "D'une inondation exceptionnelle"], "correct": 1, "exp": "Le 26 juillet 2024, plusieurs actes de sabotage coordonnés ont visé des lignes TGV (dont les axes Atlantique, Nord et Est), perturbant fortement le trafic à la veille de la cérémonie d'ouverture des JO de Paris.", "id": 11}, {"cat": "France", "q": "En mars 2025, Marine Le Pen a été condamnée en première instance, avec exécution provisoire, pour quel motif, entraînant son inéligibilité immédiate ?", "options": ["Fraude fiscale", "Détournement de fonds publics (affaire des assistants du Parlement européen)", "Financement illégal de campagne électorale", "Diffamation aggravée", "Prise illégale d'intérêts"], "correct": 1, "exp": "Le tribunal de Paris a condamné Marine Le Pen le 31 mars 2025 pour détournement de fonds publics dans l'affaire des assistants parlementaires du FN au Parlement européen, avec cinq ans d'inéligibilité à effet immédiat ; la décision a ensuite été réexaminée en appel.", "id": 12}, {"cat": "France", "q": "En octobre 2025, Nicolas Sarkozy a été incarcéré à la prison de la Santé. Dans quelle affaire a-t-il été condamné ?", "options": ["L'affaire Bygmalion", "Le soupçon de financement libyen de sa campagne de 2007", "L'affaire des sondages de l'Élysée", "L'affaire Karachi", "Le financement occulte du parti Les Républicains"], "correct": 1, "exp": "Nicolas Sarkozy a été condamné le 25 septembre 2025 dans le dossier du financement présumé de sa campagne présidentielle de 2007 par le régime libyen, puis incarcéré le 21 octobre 2025 à la prison de la Santé.", "id": 13}, {"cat": "France", "q": "Selon l'Insee, à combien s'élevait environ la dette publique française fin 2025, en proportion du PIB ?", "options": ["Environ 95 %", "Environ 105 %", "Environ 115 %", "Environ 130 %", "Environ 145 %"], "correct": 2, "exp": "Fin 2025, la dette publique française s'établissait à 115,6 % du PIB selon l'Insee, tandis que le déficit public atteignait 5,1 % du PIB.", "id": 14}, {"cat": "France", "q": "En 2025, dans le cadre des négociations budgétaires avec le Parti socialiste, Sébastien Lecornu a accepté :", "options": ["La suppression totale de la réforme des retraites de 2023", "La suspension de la réforme des retraites jusqu'après la présidentielle de 2027", "Un référendum sur les retraites", "Le retour à la retraite à 60 ans", "La baisse de la TVA sur les produits alimentaires"], "correct": 1, "exp": "Pour obtenir la non-censure de son gouvernement par les socialistes, Sébastien Lecornu a accepté de suspendre la mise en œuvre de l'allongement de l'âge légal de départ à la retraite jusqu'à l'élection présidentielle de 2027.", "id": 15}, {"cat": "France", "q": "À la rentrée scolaire de quelle année la « pause numérique » (interdiction du téléphone portable) a-t-elle été généralisée dans tous les collèges de France ?", "options": ["2022", "2023", "2024", "2025", "2026"], "correct": 3, "exp": "Annoncée par la ministre de l'Éducation nationale Élisabeth Borne, la généralisation de l'interdiction du téléphone portable dans les collèges est entrée en vigueur à la rentrée de septembre 2025.", "id": 16}, {"cat": "France", "q": "En France, les prochaines élections municipales sont prévues en mars 2026. À quelles dates précises ?", "options": ["Les 1er et 8 mars 2026", "Les 8 et 15 mars 2026", "Les 15 et 22 mars 2026", "Les 22 et 29 mars 2026", "Le 29 mars uniquement (tour unique)"], "correct": 2, "exp": "Le ministère de l'Intérieur a fixé les élections municipales et communautaires françaises aux 15 et 22 mars 2026.", "id": 17}, {"cat": "France", "q": "Qui a été réélue présidente de l'Assemblée nationale en juillet 2024, à l'issue des élections législatives anticipées ?", "options": ["Élisabeth Borne", "Yaël Braun-Pivet", "Marine Le Pen", "Mathilde Panot", "Marine Tondelier"], "correct": 1, "exp": "Yaël Braun-Pivet a été réélue à la présidence de l'Assemblée nationale le 18 juillet 2024, dans un scrutin serré face à plusieurs candidats.", "id": 18}, {"cat": "France", "q": "Avant de quitter Matignon suite à la dissolution de juin 2024, Gabriel Attal détenait un record. Lequel ?", "options": ["Premier ministre le plus âgé de la Ve République", "Plus jeune Premier ministre de la Ve République", "Premier ministre resté le plus longtemps en poste", "Premier Premier ministre issu d'un parti écologiste", "Premier Premier ministre à démissionner deux fois"], "correct": 1, "exp": "Nommé en janvier 2024 à 34 ans, Gabriel Attal est devenu le plus jeune Premier ministre de la Ve République.", "id": 19}, {"cat": "France", "q": "Au 1er janvier 2025, la population totale de la France (Outre-mer compris) était d'environ :", "options": ["61 millions d'habitants", "65 millions d'habitants", "69 millions d'habitants", "73 millions d'habitants", "77 millions d'habitants"], "correct": 2, "exp": "Selon l'Insee, la population française totale atteignait environ 69,1 millions d'habitants au 1er janvier 2025, dont environ 68,6 millions en France métropolitaine.", "id": 20}, {"cat": "France", "q": "Début 2024, un vaste mouvement de contestation a bloqué de nombreuses routes et autoroutes françaises avec des tracteurs. Qui en était à l'origine ?", "options": ["Les routiers", "Les agriculteurs", "Les taxis", "Les enseignants", "Les cheminots"], "correct": 1, "exp": "En janvier 2024, une importante mobilisation des agriculteurs français, dénonçant charges, normes environnementales et concurrence étrangère, a bloqué de nombreux axes routiers du pays.", "id": 21}, {"cat": "France", "q": "Combien de Premiers ministres différents la France a-t-elle connus entre janvier 2024 et fin 2025 (Attal, Barnier, Bayrou, Lecornu compris) ?", "options": ["Deux", "Trois", "Quatre", "Cinq", "Six"], "correct": 2, "exp": "Sur cette période, quatre personnalités se sont succédé à Matignon : Gabriel Attal, Michel Barnier, François Bayrou puis Sébastien Lecornu, illustrant l'instabilité politique de la période.", "id": 22}, {"cat": "France", "q": "En avril 2024, un projet de loi a été examiné à l'Assemblée nationale pour lutter contre la « fast-fashion ». Il prévoyait notamment :", "options": ["L'interdiction totale de la vente de vêtements en ligne", "Un système de bonus-malus sur les prix géré par un organisme indépendant", "La gratuité des transports pour les acheteurs de vêtements d'occasion", "Une taxe unique sur les magasins physiques de mode", "La création d'un label obligatoire pour tous les vêtements"], "correct": 1, "exp": "Ce texte, visant particulièrement des plateformes comme Shein ou Temu, proposait un système de bonus-malus sur les prix des vêtements, en fonction de critères environnementaux, géré par un organisme indépendant.", "id": 23}, {"cat": "France", "q": "Quel est le nom du parti présidentiel (issu de La République en Marche puis Renaissance) présidé par Gabriel Attal depuis 2024 ?", "options": ["Horizons", "Renaissance / Ensemble pour la République", "Territoires de progrès", "MoDem", "Agir"], "correct": 1, "exp": "Après avoir quitté Matignon, Gabriel Attal a pris la présidence du parti présidentiel Renaissance (rebaptisé Ensemble pour la République), poste clé pour la préparation des échéances électorales.", "id": 24}, {"cat": "France", "q": "Quelle formation politique a réalisé son meilleur score historique en sièges à l'Assemblée nationale à l'issue des élections législatives de juillet 2024, tout en n'obtenant pas la majorité relative espérée ?", "options": ["Les Républicains", "Le Rassemblement national et ses alliés", "Le Parti socialiste", "Europe Écologie Les Verts", "Lutte ouvrière"], "correct": 1, "exp": "Bien qu'arrivé troisième en nombre de sièges derrière le NFP et le bloc central, le Rassemblement national et ses alliés ont néanmoins obtenu leur meilleur résultat électoral de l'histoire du parti à l'Assemblée nationale.", "id": 25}, {"cat": "France", "q": "En France, quel organisme a validé une grande partie de la loi « immigration » de janvier 2024, tout en censurant near la moitié de ses articles jugés « cavaliers législatifs » ?", "options": ["La Cour de cassation", "Le Conseil d'État", "Le Conseil constitutionnel", "La Cour des comptes", "Le Défenseur des droits"], "correct": 2, "exp": "Le Conseil constitutionnel a censuré, le 25 janvier 2024, plus d'un tiers des articles de la loi immigration, jugés sans lien suffisant avec le texte initial (« cavaliers législatifs »).", "id": 26}, {"cat": "France", "q": "Quel événement sportif planétaire la France a-t-elle accueilli à Paris du 28 août au 8 septembre 2024, juste après les Jeux olympiques ?", "options": ["Les Championnats du monde d'athlétisme", "Les Jeux paralympiques", "La Coupe du monde de rugby", "Les Jeux de la Francophonie", "La Ryder Cup"], "correct": 1, "exp": "Les Jeux paralympiques de Paris 2024 se sont déroulés du 28 août au 8 septembre 2024, dans la continuité des Jeux olympiques.", "id": 27}, {"cat": "France", "q": "Quel est, en 2025, le taux normal de TVA appliqué en France sur la majorité des biens et services ?", "options": ["10 %", "15 %", "20 %", "22 %", "25 %"], "correct": 2, "exp": "Le taux normal de TVA en France est de 20 %, avec des taux réduits (10 %, 5,5 %, 2,1 %) pour certains produits ou services.", "id": 28}, {"cat": "France", "q": "Quelle institution française est chargée de fixer chaque mois le taux du Livret A ?", "options": ["Le Trésor public", "La Banque de France, sur recommandation à l'État", "La Bourse de Paris", "L'Insee", "Bercy seul, sans consultation"], "correct": 1, "exp": "Le taux du Livret A est fixé par le ministère de l'Économie, sur la base d'une recommandation de la Banque de France, selon une formule liée à l'inflation et aux taux interbancaires.", "id": 29}, {"cat": "France", "q": "Le Score IAE-Message évalue notamment la culture générale des candidats à travers leur connaissance de l'actualité des :", "options": ["3 derniers mois", "6 derniers mois", "12 à 24 derniers mois", "5 dernières années", "10 dernières années"], "correct": 2, "exp": "L'épreuve de culture générale du Score IAE-Message vise à évaluer l'ouverture d'esprit du candidat et sa connaissance de l'actualité des 12 à 24 derniers mois, dans les domaines politique, culturel, international et économique.", "id": 30}, {"cat": "France", "q": "En 2025, quel ministère a porté la généralisation de la « pause numérique » contre l'usage du téléphone portable au collège ?", "options": ["Le ministère de l'Intérieur", "Le ministère de l'Éducation nationale", "Le ministère de la Santé", "Le ministère de la Culture", "Le ministère du Numérique"], "correct": 1, "exp": "C'est la ministre de l'Éducation nationale, Élisabeth Borne, qui a annoncé et porté la généralisation de cette mesure dans les collèges à la rentrée 2025.", "id": 31}, {"cat": "Monde", "q": "Le 5 novembre 2024, Donald Trump a été réélu président des États-Unis. Qui était son colistier à la vice-présidence ?", "options": ["Mike Pence", "Marco Rubio", "J.D. Vance", "Ron DeSantis", "Tim Scott"], "correct": 2, "exp": "Donald Trump avait choisi le sénateur J.D. Vance (Ohio) comme colistier ; le ticket républicain a remporté l'élection du 5 novembre 2024, avec une investiture le 20 janvier 2025.", "id": 32}, {"cat": "Monde", "q": "Le 2 avril 2025, surnommé le « Liberation Day », Donald Trump a annoncé :", "options": ["Le retrait des troupes américaines d'Europe", "Une vague de droits de douane réciproques visant de nombreux pays", "La reconnaissance d'un État palestinien", "La sortie des États-Unis de l'OTAN", "Un plan de relance climatique mondial"], "correct": 1, "exp": "Le 2 avril 2025, Donald Trump a annoncé l'imposition de droits de douane réciproques sur les importations d'un très grand nombre de pays, provoquant de fortes turbulences sur les marchés mondiaux.", "id": 33}, {"cat": "Monde", "q": "Le pape François est mort le 21 avril 2025. Qui lui a succédé, devenant le premier pape américain de l'histoire ?", "options": ["Pietro Parolin, sous le nom de Pie XIII", "Robert Francis Prevost, sous le nom de Léon XIV", "Luis Antonio Tagle, sous le nom de François II", "Matteo Zuppi, sous le nom de Jean XXIV", "Péter Erdő, sous le nom de Benoît XVII"], "correct": 1, "exp": "Le conclave de mai 2025 a élu le cardinal américain Robert Francis Prevost, qui a choisi le nom de Léon XIV, devenant ainsi le premier pape né aux États-Unis.", "id": 34}, {"cat": "Monde", "q": "En mai 2025, Friedrich Merz a été élu chancelier fédéral d'Allemagne, après un premier tour raté au Bundestag. Il succède à :", "options": ["Angela Merkel", "Olaf Scholz", "Frank-Walter Steinmeier", "Robert Habeck", "Christian Lindner"], "correct": 1, "exp": "Friedrich Merz (CDU) a été élu chancelier au second tour début mai 2025, succédant à Olaf Scholz après les élections fédérales anticipées de février 2025.", "id": 35}, {"cat": "Monde", "q": "Aux élections fédérales allemandes de février 2025, quel parti a réalisé son meilleur score historique en arrivant deuxième ?", "options": ["Les Verts", "Le FDP", "L'AfD (extrême droite)", "Die Linke", "Le SPD"], "correct": 2, "exp": "L'AfD, parti d'extrême droite, est arrivée deuxième avec son meilleur résultat depuis sa création, derrière la CDU/CSU de Friedrich Merz.", "id": 36}, {"cat": "Monde", "q": "Au Canada, Mark Carney est devenu Premier ministre en mars 2025 puis a été confirmé par une élection fédérale en avril 2025. Il succède à :", "options": ["Stephen Harper", "Justin Trudeau", "Pierre Poilievre", "Jagmeet Singh", "Chrystia Freeland"], "correct": 1, "exp": "Ancien gouverneur des banques centrales du Canada et d'Angleterre, Mark Carney a succédé à Justin Trudeau à la tête du Parti libéral puis du gouvernement canadien.", "id": 37}, {"cat": "Monde", "q": "Quel prix Nobel de la paix 2025 a été décerné à une opposante vénézuélienne pour son combat pour la démocratie ?", "options": ["Maria Corina Machado", "Dilma Rousseff", "Cristina Kirchner", "Michelle Bachelet", "Ingrid Betancourt"], "correct": 0, "exp": "Maria Corina Machado, cheffe de file de l'opposition au régime de Nicolás Maduro, a reçu le prix Nobel de la paix 2025.", "id": 38}, {"cat": "Monde", "q": "En décembre 2024, le régime de quel dirigeant est tombé à Damas après une offensive rapide de groupes rebelles, mettant fin à plus de 50 ans de pouvoir de sa famille ?", "options": ["Bachar al-Assad", "Mouammar Kadhafi", "Ali Abdallah Saleh", "Omar el-Béchir", "Hosni Moubarak"], "correct": 0, "exp": "Le 8 décembre 2024, des groupes rebelles menés par Hayat Tahrir al-Cham sont entrés dans Damas, provoquant la fuite de Bachar al-Assad vers la Russie et la chute de son régime.", "id": 39}, {"cat": "Monde", "q": "En octobre 2025, le Japon s'est doté de sa première femme Première ministre. Comment se nomme-t-elle ?", "options": ["Yuriko Koike", "Sanae Takaichi", "Yoko Kamikawa", "Shinjiro Koizumi", "Renho Saito"], "correct": 1, "exp": "La conservatrice Sanae Takaichi a été élue par le Parlement japonais le 21 octobre 2025, devenant la première femme Première ministre de l'histoire du Japon.", "id": 40}, {"cat": "Monde", "q": "En mai 2025, qui a remporté l'élection présidentielle en Roumanie, dans un scrutin refait après l'annulation du premier tour de 2024 ?", "options": ["Calin Georgescu", "George Simion", "Nicusor Dan", "Marcel Ciolacu", "Klaus Iohannis"], "correct": 2, "exp": "Nicusor Dan, maire pro-européen de Bucarest, a remporté la présidentielle roumaine de mai 2025 face au nationaliste George Simion, après l'annulation controversée du scrutin de 2024.", "id": 41}, {"cat": "Monde", "q": "En juin 2025, qui a remporté l'élection présidentielle polonaise face à Rafal Trzaskowski ?", "options": ["Andrzej Duda", "Karol Nawrocki", "Donald Tusk", "Slawomir Mentzen", "Szymon Holownia"], "correct": 1, "exp": "Karol Nawrocki, candidat conservateur proche du PiS et de Donald Trump, a remporté de justesse l'élection présidentielle polonaise de juin 2025.", "id": 42}, {"cat": "Monde", "q": "En janvier 2025, quel grand pays d'Asie du Sud-Est est officiellement devenu membre à part entière des BRICS ?", "options": ["Le Vietnam", "La Thaïlande", "L'Indonésie", "Les Philippines", "La Malaisie"], "correct": 2, "exp": "L'Indonésie a rejoint officiellement les BRICS en janvier 2025, devenant le premier pays d'Asie du Sud-Est membre à part entière du groupe.", "id": 43}, {"cat": "Monde", "q": "En septembre-octobre 2025, un plan de paix pour Gaza, porté par les États-Unis, a été proposé. Quel président américain en est à l'origine ?", "options": ["Joe Biden", "Donald Trump", "Barack Obama", "George W. Bush", "Bill Clinton"], "correct": 1, "exp": "Donald Trump a présenté fin septembre 2025 un plan de paix en vingt points pour Gaza, accepté dans ses grandes lignes par Israël et le Hamas, débouchant sur un cessez-le-feu.", "id": 44}, {"cat": "Monde", "q": "En décembre 2024, un président sud-coréen a brièvement instauré la loi martiale avant d'être destitué. Comment se nomme-t-il ?", "options": ["Moon Jae-in", "Yoon Suk-yeol", "Lee Jae-myung", "Park Geun-hye", "Han Duck-soo"], "correct": 1, "exp": "Le président Yoon Suk-yeol a déclaré la loi martiale le 3 décembre 2024 avant de faire volte-face sous la pression du Parlement ; il a ensuite été destitué et arrêté.", "id": 45}, {"cat": "Monde", "q": "En septembre 2024, le chef du Hezbollah a été tué par une frappe israélienne au Liban. Qui était-il ?", "options": ["Hassan Nasrallah", "Naim Qassem", "Ismaïl Haniyeh", "Yahya Sinouar", "Mohammed Deif"], "correct": 0, "exp": "Hassan Nasrallah, secrétaire général du Hezbollah depuis 1992, a été tué le 27 septembre 2024 lors d'une frappe israélienne massive sur Beyrouth.", "id": 46}, {"cat": "Monde", "q": "En août 2025, un sommet entre Donald Trump et Vladimir Poutine consacré à la guerre en Ukraine s'est tenu dans quel État américain ?", "options": ["La Floride", "Le Texas", "L'Alaska", "New York", "La Californie"], "correct": 2, "exp": "Le sommet Trump-Poutine du 15 août 2025, portant sur une possible issue au conflit en Ukraine, s'est déroulé à Anchorage, en Alaska.", "id": 47}, {"cat": "Monde", "q": "Quel organisme international a tenu sa COP30 sur le climat en novembre 2025, dans la ville brésilienne de Belém ?", "options": ["L'Organisation mondiale du commerce", "Les Nations unies (CCNUCC)", "L'Union africaine", "Le G20", "La Banque mondiale"], "correct": 1, "exp": "La COP30, conférence des Nations unies sur les changements climatiques, s'est tenue à Belém, aux portes de l'Amazonie, en novembre 2025.", "id": 48}, {"cat": "Monde", "q": "Quel pays a accueilli les élections européennes en tant qu'événement politique majeur de juin 2024, marquées par une poussée des partis d'extrême droite dans plusieurs pays membres ?", "options": ["Un seul pays organisateur : la Belgique", "L'ensemble des 27 États membres de l'Union européenne", "Uniquement la France et l'Allemagne", "Le Royaume-Uni et l'Irlande", "La Suisse, pays non membre"], "correct": 1, "exp": "Les élections européennes de juin 2024 se sont tenues simultanément dans les 27 États membres de l'Union européenne, avec une progression notable des partis nationalistes et d'extrême droite.", "id": 49}, {"cat": "Monde", "q": "Qui a été élu Premier ministre du Royaume-Uni en juillet 2024, mettant fin à 14 ans de gouvernements conservateurs ?", "options": ["Rishi Sunak", "Keir Starmer", "Nigel Farage", "Boris Johnson", "Jeremy Corbyn"], "correct": 1, "exp": "Keir Starmer, chef du Parti travailliste, a remporté les élections législatives britanniques de juillet 2024, devenant Premier ministre après 14 années de pouvoir conservateur.", "id": 50}, {"cat": "Monde", "q": "En 2025, l'Autriche a remporté le Concours Eurovision de la chanson grâce à quel(le) artiste ?", "options": ["Nemo", "JJ", "Käärijä", "Loreen", "Baby Lasagna"], "correct": 1, "exp": "Le chanteur autrichien JJ a remporté l'Eurovision 2025 avec le titre « Wasted Love », offrant à l'Autriche sa troisième victoire dans le concours.", "id": 51}, {"cat": "Monde", "q": "En mai 2026, quel pays a remporté le Concours Eurovision de la chanson, succédant ainsi à l'Autriche au palmarès ?", "options": ["La Suisse", "La Bulgarie", "La Suède", "L'Ukraine", "L'Italie"], "correct": 1, "exp": "La Bulgarie a remporté l'édition 2026 du Concours Eurovision de la chanson, un an après la victoire de l'Autriche.", "id": 52}, {"cat": "Monde", "q": "En 2024-2025, quel groupe djihadiste a mené l'offensive rebelle ayant renversé Bachar al-Assad en Syrie ?", "options": ["Daech", "Al-Qaïda au Maghreb islamique", "Hayat Tahrir al-Cham", "Boko Haram", "Les Houthis"], "correct": 2, "exp": "C'est le groupe Hayat Tahrir al-Cham (HTC), dirigé par Ahmed al-Charaa (Abou Mohammed al-Joulani), qui a mené l'offensive victorieuse de fin 2024 contre le régime de Bachar al-Assad.", "id": 53}, {"cat": "Monde", "q": "En décembre 2024, l'Union européenne a conclu un accord de libre-échange controversé avec un bloc régional sud-américain, dénoncé notamment par la France et le monde agricole. De quel bloc s'agit-il ?", "options": ["L'ALENA", "Le Mercosur", "La CELAC", "L'ANASE", "L'Union africaine"], "correct": 1, "exp": "L'accord politique UE-Mercosur (Argentine, Brésil, Paraguay, Uruguay) a été conclu en décembre 2024, suscitant une forte opposition du monde agricole français en raison de la concurrence redoutée.", "id": 54}, {"cat": "Monde", "q": "En juin 2025, Israël et l'Iran se sont livrés à un affrontement direct resté dans l'histoire sous le nom de :", "options": ["La guerre des Six Jours", "La guerre des Douze Jours", "L'opération Plomb durci", "La guerre du Kippour", "L'opération Bouclier du Nord"], "correct": 1, "exp": "Du 12 au 24 juin 2025, Israël et l'Iran se sont frappés directement pendant douze jours, avec une intervention américaine sur des sites nucléaires iraniens, avant un cessez-le-feu.", "id": 55}, {"cat": "Monde", "q": "En 2025, Donald Trump a plusieurs fois affirmé vouloir que les États-Unis s'emparent d'un immense territoire arctique appartenant à un pays allié européen. Lequel ?", "options": ["L'Islande", "Le Groenland (Danemark)", "Le Spitzberg (Norvège)", "Les îles Féroé", "La Laponie (Finlande)"], "correct": 1, "exp": "Donald Trump a réitéré en 2025 son souhait que les États-Unis obtiennent le Groenland, territoire autonome danois, provoquant une vive protestation de Copenhague et de l'Union européenne.", "id": 56}, {"cat": "Monde", "q": "Ursula von der Leyen a été confirmée pour un second mandat à la tête de quelle institution européenne en juillet 2024 ?", "options": ["Le Parlement européen", "Le Conseil européen", "La Commission européenne", "La Banque centrale européenne", "La Cour de justice de l'Union européenne"], "correct": 2, "exp": "Ursula von der Leyen a été réélue présidente de la Commission européenne par le Parlement européen en juillet 2024, entamant un second mandat de cinq ans.", "id": 57}, {"cat": "Monde", "q": "Depuis décembre 2023, quel président libertarien dirige l'Argentine avec un programme de choc économique (dollarisation, dérégulation massive) ?", "options": ["Alberto Fernández", "Javier Milei", "Sergio Massa", "Mauricio Macri", "Cristina Kirchner"], "correct": 1, "exp": "Javier Milei, économiste libertarien, dirige l'Argentine depuis décembre 2023 et a mené un vaste programme d'austérité et de dérégulation économique.", "id": 58}, {"cat": "Monde", "q": "En 2024, Nicolás Maduro a été contesté après avoir revendiqué sa victoire à l'élection présidentielle. De quel pays est-il le président ?", "options": ["Le Nicaragua", "Le Venezuela", "La Bolivie", "L'Équateur", "Cuba"], "correct": 1, "exp": "Nicolás Maduro a revendiqué sa réélection à la présidence du Venezuela en juillet 2024, résultat contesté par l'opposition, une partie de la communauté internationale et par Maria Corina Machado.", "id": 59}, {"cat": "Monde", "q": "En 2025, quel format de sommet Trump-Poutine a marqué une tentative de désamorcer le conflit en Ukraine, sans la participation directe de Kiev ni de l'Union européenne ?", "options": ["Le sommet de Genève", "Le sommet d'Anchorage (Alaska)", "Le sommet d'Helsinki", "Le sommet de Reykjavik", "Le sommet de Vienne"], "correct": 1, "exp": "Le sommet Trump-Poutine du 15 août 2025 en Alaska a suscité de vives inquiétudes en Europe et en Ukraine, non conviées aux discussions.", "id": 60}, {"cat": "Monde", "q": "Quel pays préside le G20 en 2025, année marquée par des tensions sur le multilatéralisme ?", "options": ["Le Brésil", "L'Inde", "L'Afrique du Sud", "Les États-Unis", "L'Indonésie"], "correct": 2, "exp": "L'Afrique du Sud a assuré la présidence du G20 en 2025, une première pour un pays africain, avant que la présidence ne soit transmise aux États-Unis pour 2026.", "id": 61}, {"cat": "Éco", "q": "Que signifie le sigle EBITDA, très utilisé en analyse financière d'entreprise ?", "options": ["Le résultat net après impôts", "Le résultat avant intérêts, impôts, dépréciation et amortissement", "L'excédent brut d'exploitation en devises", "Le bénéfice par action ajusté", "La valeur actuelle nette des investissements"], "correct": 1, "exp": "L'EBITDA (Earnings Before Interest, Taxes, Depreciation and Amortization) mesure la rentabilité opérationnelle d'une entreprise avant charges financières, fiscales et non monétaires.", "id": 62}, {"cat": "Éco", "q": "Quel objectif d'inflation à moyen terme la Banque centrale européenne (BCE) cherche-t-elle à maintenir dans la zone euro ?", "options": ["0 %", "1 %", "2 %", "3 %", "4 %"], "correct": 2, "exp": "Conformément à son mandat, la BCE vise une cible d'inflation de 2 % à moyen terme dans la zone euro.", "id": 63}, {"cat": "Éco", "q": "En 2025-2026, après plusieurs baisses successives, à quel niveau se situe approximativement le principal taux directeur de la BCE ?", "options": ["0 %", "1 %", "2 %", "4 %", "6 %"], "correct": 2, "exp": "Après le cycle de hausses de 2022-2023 pour lutter contre l'inflation, la BCE a progressivement baissé ses taux ; son taux de dépôt se situe autour de 2 % en 2025-2026.", "id": 64}, {"cat": "Éco", "q": "Qu'est-ce que la RSE, notion centrale dans le management contemporain des entreprises ?", "options": ["La Rémunération Salariale Équitable", "La Responsabilité Sociétale des Entreprises", "Le Régime Social des Entrepreneurs", "La Réglementation des Statuts d'Entreprise", "La Réserve Stratégique d'Épargne"], "correct": 1, "exp": "La RSE (Responsabilité Sociétale des Entreprises) désigne la prise en compte volontaire par les entreprises des enjeux sociaux et environnementaux dans leurs activités et leurs relations avec les parties prenantes.", "id": 65}, {"cat": "Éco", "q": "Quelle norme ISO propose un cadre de référence international pour structurer une démarche de RSE ?", "options": ["ISO 9001", "ISO 14001", "ISO 26000", "ISO 27001", "ISO 22000"], "correct": 2, "exp": "L'ISO 26000, publiée en 2010, est une norme (non certifiable) qui donne des lignes directrices pour aider les organisations à structurer leur démarche de responsabilité sociétale.", "id": 66}, {"cat": "Éco", "q": "Que mesure le coefficient de Gini, fréquemment cité pour comparer les pays ?", "options": ["Le niveau de croissance économique", "Les inégalités de revenus ou de richesse au sein d'une population", "Le taux de chômage structurel", "La compétitivité industrielle", "Le niveau d'endettement public"], "correct": 1, "exp": "Le coefficient de Gini, compris entre 0 (égalité parfaite) et 1 (inégalité totale), est l'indicateur le plus utilisé pour mesurer les inégalités de répartition des revenus ou du patrimoine.", "id": 67}, {"cat": "Éco", "q": "Dans le langage des entreprises, que désigne la « taxonomie verte » adoptée par l'Union européenne en 2020 ?", "options": ["Une liste des entreprises interdites de cotation en bourse", "Un système de classification des activités économiques considérées comme durables sur le plan environnemental", "Un impôt sur les émissions de CO2 des entreprises", "Un label attribué aux seuls produits biologiques", "Une norme comptable internationale"], "correct": 1, "exp": "La taxonomie verte européenne est un système de classification définissant les critères qu'une activité économique doit remplir pour être considérée comme durable sur le plan environnemental.", "id": 68}, {"cat": "Éco", "q": "Quel terme désigne une société dont les capitaux propres sont insuffisants au regard de son activité ou de son endettement ?", "options": ["Une société sur-capitalisée", "Une société sous-capitalisée", "Une société cotée", "Une société holding", "Une société en commandite"], "correct": 1, "exp": "Une société est dite sous-capitalisée lorsqu'il existe une disproportion entre ses fonds propres et ses fonds empruntés, ce qui fragilise sa structure financière.", "id": 69}, {"cat": "Éco", "q": "Que signifie le sigle PIB, indicateur macroéconomique de référence ?", "options": ["Produit Intérieur Brut", "Prix Indexé sur les Biens", "Placement en Instruments Bancaires", "Programme d'Investissement Budgétaire", "Positionnement International des Banques"], "correct": 0, "exp": "Le Produit Intérieur Brut (PIB) mesure la valeur totale des biens et services produits sur le territoire d'un pays durant une période donnée.", "id": 70}, {"cat": "Éco", "q": "En finance de marché, que désigne l'acronyme ROI, très utilisé pour juger la rentabilité d'un investissement ?", "options": ["Return On Investment (retour sur investissement)", "Rate Of Interest (taux d'intérêt)", "Risk of Insolvency (risque d'insolvabilité)", "Rate Of Inflation (taux d'inflation)", "Return On Innovation (retour sur innovation)"], "correct": 0, "exp": "Le ROI (Return On Investment) mesure le rapport entre le gain généré par un investissement et son coût initial, exprimé en pourcentage.", "id": 71}, {"cat": "Éco", "q": "Qu'appelle-t-on un « marketing omnibus » dans une étude de marché ?", "options": ["Une étude de marché ambulante", "Une étude de marché périodique, réalisée pour plusieurs clients à la fois sur un même questionnaire", "Une campagne de publicité dans les transports en commun", "Un lancement produit multi-canal", "Une étude qualitative réservée aux grandes entreprises"], "correct": 1, "exp": "Une étude « omnibus » est une étude de marché périodique et mutualisée, au cours de laquelle plusieurs entreprises clientes font poser leurs questions à un même panel de répondants, ce qui en réduit le coût.", "id": 72}, {"cat": "Éco", "q": "Le prix Nobel d'économie 2025 a été attribué à un chercheur français, avec deux autres lauréats, pour ses travaux sur l'innovation et la croissance. Qui est-il ?", "options": ["Thomas Piketty", "Esther Duflo", "Philippe Aghion", "Jean Tirole", "Olivier Blanchard"], "correct": 2, "exp": "Philippe Aghion a reçu le prix Nobel d'économie 2025, avec Joel Mokyr et Peter Howitt, pour leurs travaux sur l'innovation technologique et la « destruction créatrice » comme moteurs de la croissance économique.", "id": 73}, {"cat": "Éco", "q": "Quel concept économique, popularisé par Joseph Schumpeter, désigne le processus par lequel l'innovation détruit les structures économiques anciennes pour en créer de nouvelles ?", "options": ["La main invisible", "La destruction créatrice", "La loi de l'offre et de la demande", "L'effet cliquet", "La trappe à liquidité"], "correct": 1, "exp": "La « destruction créatrice » est un concept développé par l'économiste Joseph Schumpeter, désignant le renouvellement permanent du tissu économique par l'innovation, qui rend obsolètes les activités anciennes.", "id": 74}, {"cat": "Éco", "q": "En France, quel est en 2025 le taux normal de l'impôt sur les sociétés (IS) applicable à la plupart des grandes entreprises ?", "options": ["15 %", "25 %", "33,33 %", "40 %", "50 %"], "correct": 1, "exp": "Depuis 2022, le taux normal de l'impôt sur les sociétés en France est fixé à 25 %, après plusieurs années de baisse progressive depuis 33,33 %.", "id": 75}, {"cat": "Éco", "q": "Au dernier trimestre 2025, le taux de chômage en France, selon l'Insee, se situait autour de :", "options": ["4 %", "5,5 %", "7,9 %", "10,5 %", "13 %"], "correct": 2, "exp": "Le taux de chômage français a atteint 7,9 % au quatrième trimestre 2025 selon l'Insee, en légère hausse sur l'année.", "id": 76}, {"cat": "Éco", "q": "Quel label garantit qu'un produit en papier ou en bois est issu d'une gestion durable des forêts ?", "options": ["Le label AB", "Le label FSC", "Le label NF Environnement", "Le label Max Havelaar", "Le label Rouge"], "correct": 1, "exp": "Le label FSC (Forest Stewardship Council), dont le logo représente un arbre stylisé, certifie une gestion forestière responsable sur le plan environnemental, social et économique.", "id": 77}, {"cat": "Éco", "q": "Qu'est-ce que le « devoir de vigilance », obligation renforcée pour les grandes entreprises françaises et européennes ?", "options": ["L'obligation de surveiller les horaires de travail des salariés", "L'obligation de prévenir les risques sociaux et environnementaux dans toute la chaîne d'approvisionnement", "L'obligation de publier ses comptes chaque trimestre", "L'obligation de recruter un délégué à la protection des données", "L'obligation de certifier ses produits biologiques"], "correct": 1, "exp": "Le devoir de vigilance impose aux grandes entreprises d'identifier et de prévenir les risques graves pour les droits humains, la santé, la sécurité et l'environnement, y compris chez leurs fournisseurs et sous-traitants.", "id": 78}, {"cat": "Éco", "q": "Quel organisme international a pour mission principale d'assurer la stabilité financière mondiale en accordant des prêts aux pays en difficulté ?", "options": ["La Banque mondiale", "Le Fonds monétaire international (FMI)", "L'Organisation mondiale du commerce (OMC)", "La Banque des règlements internationaux (BRI)", "L'OCDE"], "correct": 1, "exp": "Le FMI a pour mission de veiller à la stabilité du système financier international et d'accorder une assistance financière aux pays confrontés à des difficultés de balance des paiements.", "id": 79}, {"cat": "Éco", "q": "Qui est la directrice générale du Fonds monétaire international (FMI) depuis 2019 ?", "options": ["Christine Lagarde", "Kristalina Georgieva", "Ursula von der Leyen", "Roberta Metsola", "Janet Yellen"], "correct": 1, "exp": "Kristalina Georgieva est directrice générale du FMI depuis 2019, tandis que Christine Lagarde préside la Banque centrale européenne depuis la même année.", "id": 80}, {"cat": "Éco", "q": "Que désigne le terme « licorne » dans le monde de l'entrepreneuriat et de la tech ?", "options": ["Une entreprise centenaire", "Une start-up valorisée à plus d'un milliard de dollars sans être cotée en bourse", "Une entreprise dirigée uniquement par des femmes", "Une PME familiale non endettée", "Une entreprise publique privatisée"], "correct": 1, "exp": "Une « licorne » désigne une start-up non cotée en bourse dont la valorisation dépasse le milliard de dollars, terme popularisé dans l'écosystème de la tech.", "id": 81}, {"cat": "Éco", "q": "Quel géant américain de l'intelligence artificielle, éditeur de ChatGPT, a vu sa valorisation exploser pour devenir l'une des plus fortes du secteur technologique en 2024-2025 ?", "options": ["Anthropic", "OpenAI", "Mistral AI", "Perplexity AI", "Cohere"], "correct": 1, "exp": "OpenAI, éditeur de ChatGPT, a vu sa valorisation atteindre plusieurs centaines de milliards de dollars lors de ses levées de fonds successives en 2024 et 2025, portée par l'essor de l'intelligence artificielle générative.", "id": 82}, {"cat": "Éco", "q": "Quelle start-up française d'intelligence artificielle générative, fondée en 2023 par d'anciens chercheurs de Meta et Google DeepMind, est devenue un symbole de la « tech » tricolore ?", "options": ["Dataiku", "Mistral AI", "Doctolib", "Contentsquare", "Blablacar"], "correct": 1, "exp": "Mistral AI, fondée à Paris en 2023, s'est rapidement imposée comme le principal champion européen de l'intelligence artificielle générative, avec des levées de fonds record.", "id": 83}, {"cat": "Éco", "q": "Qu'appelle-t-on le « Say on Pay » dans la gouvernance des entreprises cotées ?", "options": ["Le vote consultatif des actionnaires sur la rémunération des dirigeants", "Le droit des salariés de fixer leur propre salaire", "Un système de primes collectives", "Une taxe sur les hauts revenus", "Un accord de branche sur les salaires minimums"], "correct": 0, "exp": "Le « Say on Pay » désigne le droit accordé aux actionnaires de se prononcer, par un vote consultatif ou contraignant selon les pays, sur la politique de rémunération des dirigeants d'une entreprise cotée.", "id": 84}, {"cat": "Éco", "q": "Dans le vocabulaire boursier, qu'est-ce qu'une OPA (offre publique d'achat) ?", "options": ["Une procédure par laquelle une entreprise propose de racheter les actions d'une société cotée pour en prendre le contrôle", "Une augmentation de capital réservée aux salariés", "Une introduction en bourse", "Le versement d'un dividende exceptionnel", "Un emprunt obligataire international"], "correct": 0, "exp": "Une OPA consiste, pour une entreprise ou un investisseur, à proposer publiquement le rachat des actions d'une société cotée en bourse, en vue d'en prendre le contrôle.", "id": 85}, {"cat": "Éco", "q": "Quel est le nom du principal indice boursier regroupant les 40 plus grandes capitalisations de la Bourse de Paris ?", "options": ["Le Dow Jones", "Le CAC 40", "Le DAX", "Le FTSE 100", "Le Nikkei 225"], "correct": 1, "exp": "Le CAC 40 (Cotation Assistée en Continu) regroupe les 40 plus grandes capitalisations boursières françaises cotées sur Euronext Paris.", "id": 86}, {"cat": "Éco", "q": "Que signifie l'acronyme OPEP, cartel influençant fortement le prix du pétrole mondial ?", "options": ["Organisation des Pays Exportateurs de Pétrole", "Organisation pour l'Énergie et la Prospérité", "Office de Protection de l'Économie Pétrolière", "Organisation Panafricaine de l'Énergie Propre", "Organisation des Producteurs d'Énergie Primaire"], "correct": 0, "exp": "L'OPEP (Organisation des pays exportateurs de pétrole) regroupe plusieurs pays producteurs qui coordonnent leur politique pétrolière afin d'influencer les cours mondiaux du pétrole.", "id": 87}, {"cat": "Histoire", "q": "En quelle année le traité de Rome a-t-il créé la Communauté économique européenne (CEE), ancêtre de l'Union européenne ?", "options": ["1945", "1951", "1957", "1963", "1992"], "correct": 2, "exp": "Le traité de Rome, signé en 1957 par six pays fondateurs (France, Allemagne, Italie, Belgique, Pays-Bas, Luxembourg), a créé la Communauté économique européenne.", "id": 88}, {"cat": "Histoire", "q": "L'ONU a été créée à la fin de la Seconde Guerre mondiale. En quelle année et dans quelle ville a été signée sa charte fondatrice ?", "options": ["1943 à Téhéran", "1944 à Bretton Woods", "1945 à San Francisco", "1946 à Londres", "1948 à Paris"], "correct": 2, "exp": "La Charte des Nations unies a été signée le 26 juin 1945 à San Francisco, avant l'entrée en vigueur officielle de l'organisation le 24 octobre de la même année.", "id": 89}, {"cat": "Histoire", "q": "Quel accord international de juillet 1944 a jeté les bases du système financier international de l'après-guerre, créant notamment le FMI et la Banque mondiale ?", "options": ["Les accords de Yalta", "Les accords de Bretton Woods", "Le traité de Versailles", "Les accords de Potsdam", "Le pacte Briand-Kellogg"], "correct": 1, "exp": "Les accords de Bretton Woods, signés en juillet 1944 par 44 pays alliés, ont instauré un nouveau système monétaire international et créé le FMI et la Banque mondiale.", "id": 90}, {"cat": "Histoire", "q": "En quelle année le général de Gaulle a-t-il lancé son célèbre appel du 18 juin depuis Londres ?", "options": ["1939", "1940", "1941", "1942", "1944"], "correct": 1, "exp": "Le général de Gaulle a lancé son appel à la résistance depuis les studios de la BBC à Londres le 18 juin 1940, au lendemain de la demande d'armistice du maréchal Pétain.", "id": 91}, {"cat": "Histoire", "q": "Qui fut le dernier président de la IVe République française, avant l'instauration de la Ve République en 1958 ?", "options": ["Léon Blum", "Paul Doumer", "Vincent Auriol", "René Coty", "Charles de Gaulle"], "correct": 3, "exp": "René Coty fut le dernier président de la IVe République (1954-1959), avant de faire appel au général de Gaulle pour former un nouveau gouvernement en 1958.", "id": 92}, {"cat": "Histoire", "q": "Le protocole de Kyoto, signé en 1997, avait pour principal objectif :", "options": ["De limiter la surpêche dans les eaux internationales", "De réduire les émissions de gaz à effet de serre des pays industrialisés", "De fixer des quotas d'émissions pour chaque individu", "De promouvoir le commerce mondial", "D'obliger tous les pays à éliminer les combustibles fossiles"], "correct": 1, "exp": "Le protocole de Kyoto engageait les pays industrialisés signataires à réduire leurs émissions de gaz à effet de serre selon des objectifs chiffrés et différenciés.", "id": 93}, {"cat": "Histoire", "q": "En 2015, l'accord de Paris sur le climat a fixé un objectif de limitation du réchauffement climatique par rapport à l'ère préindustrielle. Lequel ?", "options": ["Maximum 1,2°C", "Bien en dessous de 2°C, avec un objectif de 1,5°C", "Maximum 3°C", "Maximum 4°C", "Aucun objectif chiffré n'a été fixé"], "correct": 1, "exp": "L'accord de Paris, adopté lors de la COP21 en décembre 2015, fixe l'objectif de contenir le réchauffement climatique bien en dessous de 2°C par rapport à l'ère préindustrielle, avec un objectif idéal de 1,5°C.", "id": 94}, {"cat": "Histoire", "q": "Quel homme d'État français a initié les grandes réformes sociales du Front populaire en 1936 (congés payés, semaine de 40 heures) ?", "options": ["Georges Clemenceau", "Léon Blum", "Édouard Daladier", "Philippe Pétain", "Raymond Poincaré"], "correct": 1, "exp": "Léon Blum, chef du gouvernement du Front populaire à partir de mai 1936, a fait adopter les accords de Matignon instaurant notamment les congés payés et la semaine de 40 heures.", "id": 95}, {"cat": "Histoire", "q": "En quelle année la Seconde Guerre mondiale a-t-elle officiellement pris fin, avec la capitulation du Japon ?", "options": ["1943", "1944", "1945", "1946", "1947"], "correct": 2, "exp": "Le Japon a capitulé le 2 septembre 1945, après les bombardements atomiques d'Hiroshima et Nagasaki, marquant la fin officielle de la Seconde Guerre mondiale.", "id": 96}, {"cat": "Histoire", "q": "Le mur de Berlin, symbole de la division de l'Europe pendant la Guerre froide, est tombé en :", "options": ["1985", "1987", "1989", "1991", "1993"], "correct": 2, "exp": "Le mur de Berlin est tombé le 9 novembre 1989, marquant symboliquement la fin de la Guerre froide et ouvrant la voie à la réunification allemande en 1990.", "id": 97}, {"cat": "Histoire", "q": "Quel traité, signé en 1992, a créé l'Union européenne et posé les bases de la monnaie unique européenne ?", "options": ["Le traité de Rome", "Le traité de Maastricht", "Le traité de Lisbonne", "Le traité d'Amsterdam", "Le traité de Nice"], "correct": 1, "exp": "Le traité de Maastricht, signé en 1992, a créé l'Union européenne et fixé les critères de convergence économique menant à l'euro.", "id": 98}, {"cat": "Histoire", "q": "Qui fut le premier président de la Ve République française, instaurée en 1958 ?", "options": ["Georges Pompidou", "Charles de Gaulle", "Valéry Giscard d'Estaing", "René Coty", "François Mitterrand"], "correct": 1, "exp": "Charles de Gaulle fut élu premier président de la Ve République en décembre 1958, après avoir porté la nouvelle Constitution adoptée par référendum.", "id": 99}, {"cat": "Éco", "q": "En décembre 2024, le groupe français Vivendi a réalisé une opération financière majeure. Laquelle ?", "options": ["Sa nationalisation par l'État français", "Sa scission en trois entités cotées séparément : Canal+, Havas et Louis Hachette Group", "Sa fusion avec Bolloré SE", "Son rachat total par Disney", "Son retrait de la Bourse de Paris"], "correct": 1, "exp": "Vivendi a été scindé en décembre 2024 en trois sociétés indépendantes cotées séparément en Bourse : Canal+, Havas et Louis Hachette Group, mettant fin à des décennies de conglomérat.", "id": 100}, {"cat": "Éco", "q": "Que signifie le sigle OCDE ?", "options": ["Organisation de Coopération et de Développement Économiques", "Office de Contrôle du Droit des Entreprises", "Organisation Commerciale des Échanges", "Organisation pour le Commerce et le Développement en Europe", "Office Central des Douanes Européennes"], "correct": 0, "exp": "L'OCDE (Organisation de coopération et de développement économiques) regroupe une quarantaine de pays qui coordonnent leurs politiques économiques et sociales.", "id": 101}, {"cat": "Éco", "q": "Qu'appelle-t-on le BFR (besoin en fonds de roulement) d'une entreprise ?", "options": ["Le montant de ses dettes bancaires à long terme", "Le décalage de trésorerie entre les décaissements et les encaissements liés à son cycle d'exploitation", "Le total de ses immobilisations corporelles", "Son chiffre d'affaires annuel hors taxes", "Le montant de ses dividendes versés aux actionnaires"], "correct": 1, "exp": "Le BFR mesure le besoin de financement lié au décalage entre les dépenses (achats, salaires) et les recettes (encaissement des ventes) dans le cycle d'exploitation d'une entreprise.", "id": 102}, {"cat": "Éco", "q": "Que désigne le terme « stagflation » en économie ?", "options": ["Une croissance économique très forte et durable", "La coexistence d'une croissance faible (ou stagnante) et d'une inflation élevée", "Une baisse continue des prix", "Une hausse rapide du taux de change", "Une politique de relance budgétaire massive"], "correct": 1, "exp": "La stagflation désigne une situation économique atypique combinant stagnation de la croissance (voire récession) et inflation élevée, comme dans les années 1970 lors des chocs pétroliers.", "id": 103}, {"cat": "Histoire", "q": "Quelle date symbolique de 1789 marque le début traditionnel de la Révolution française, désormais fête nationale ?", "options": ["Le 5 mai 1789", "Le 20 juin 1789 (serment du Jeu de paume)", "Le 14 juillet 1789 (prise de la Bastille)", "Le 26 août 1789", "Le 21 septembre 1792"], "correct": 2, "exp": "La prise de la Bastille, prison symbole de l'arbitraire royal, a eu lieu le 14 juillet 1789 ; cette date est devenue la fête nationale française.", "id": 104}, {"cat": "Histoire", "q": "En quelle année Napoléon Bonaparte s'est-il fait sacrer empereur des Français à Notre-Dame de Paris ?", "options": ["1799", "1802", "1804", "1808", "1812"], "correct": 2, "exp": "Napoléon Bonaparte s'est fait sacrer empereur le 2 décembre 1804 à Notre-Dame de Paris, en présence du pape Pie VII.", "id": 105}, {"cat": "Histoire", "q": "Quelle célèbre victoire militaire de Napoléon en 1805, remportée contre les empereurs d'Autriche et de Russie, est surnommée la « bataille des trois empereurs » ?", "options": ["La bataille de Waterloo", "La bataille d'Austerlitz", "La bataille de Iéna", "La bataille de Wagram", "La bataille de Trafalgar"], "correct": 1, "exp": "La bataille d'Austerlitz, remportée le 2 décembre 1805, est considérée comme le chef-d'œuvre militaire de Napoléon et reste surnommée la « bataille des trois empereurs ».", "id": 106}, {"cat": "Histoire", "q": "La Première Guerre mondiale s'est achevée par la signature de l'armistice à quelle date ?", "options": ["Le 11 novembre 1918", "Le 28 juin 1919", "Le 8 mai 1918", "Le 1er septembre 1918", "Le 11 novembre 1919"], "correct": 0, "exp": "L'armistice mettant fin aux combats de la Première Guerre mondiale a été signé le 11 novembre 1918 à Rethondes, date commémorée chaque année en France.", "id": 107}, {"cat": "Histoire", "q": "Le traité mettant officiellement fin à la Première Guerre mondiale et imposant de lourdes réparations à l'Allemagne a été signé en 1919 dans quel lieu ?", "options": ["Le château de Versailles", "Le palais de l'Élysée", "Le château de Fontainebleau", "Le palais des Nations à Genève", "L'hôtel de ville de Paris"], "correct": 0, "exp": "Le traité de Versailles, signé le 28 juin 1919 dans la galerie des Glaces du château de Versailles, a scellé la fin de la Première Guerre mondiale.", "id": 108}, {"cat": "Histoire", "q": "Le krach boursier qui a déclenché la grande dépression économique mondiale a eu lieu en octobre de quelle année, à Wall Street ?", "options": ["1919", "1929", "1939", "1949", "1959"], "correct": 1, "exp": "Le krach de Wall Street, en octobre 1929, a précipité la Grande Dépression, une crise économique mondiale durable des années 1930.", "id": 109}, {"cat": "Histoire", "q": "En quelle année l'Algérie a-t-elle accédé à l'indépendance, à l'issue des accords d'Évian ?", "options": ["1954", "1958", "1962", "1968", "1975"], "correct": 2, "exp": "Les accords d'Évian, signés en mars 1962, ont mis fin à la guerre d'Algérie et ouvert la voie à son indépendance, proclamée le 5 juillet 1962.", "id": 110}, {"cat": "Histoire", "q": "Le mouvement social et étudiant de « Mai 68 » en France a notamment débouché sur :", "options": ["La chute de la Ve République", "D'importantes avancées sociales (accords de Grenelle) et une évolution des mœurs", "L'instauration du septennat présidentiel", "La création de la Sécurité sociale", "L'abolition de la peine de mort"], "correct": 1, "exp": "Mai 68 a donné lieu aux accords de Grenelle (hausse du SMIC et des salaires) et a profondément marqué l'évolution des mœurs et de la société française, sans pour autant renverser les institutions.", "id": 111}, {"cat": "Histoire", "q": "En 1981, qui devient le premier président socialiste élu sous la Ve République française ?", "options": ["Pierre Mendès France", "François Mitterrand", "Michel Rocard", "Lionel Jospin", "Valéry Giscard d'Estaing"], "correct": 1, "exp": "François Mitterrand a été élu président de la République en mai 1981, devenant le premier président socialiste de la Ve République.", "id": 112}, {"cat": "Histoire", "q": "L'euro a été introduit comme monnaie scripturale (comptes, virements) en 1999, avant l'apparition des pièces et billets. En quelle année les citoyens ont-ils pu payer en euros dans leur porte-monnaie ?", "options": ["1999", "2000", "2001", "2002", "2005"], "correct": 3, "exp": "L'euro fiduciaire (pièces et billets) a été mis en circulation le 1er janvier 2002 dans les pays de la zone euro, trois ans après son introduction comptable.", "id": 113}, {"cat": "Histoire", "q": "La dislocation de l'URSS, mettant fin à la Guerre froide, est officiellement actée en :", "options": ["1985", "1989", "1991", "1993", "1995"], "correct": 2, "exp": "L'URSS a officiellement cessé d'exister le 26 décembre 1991, remplacée par la Communauté des États indépendants (CEI) et quinze républiques indépendantes.", "id": 114}, {"cat": "Géo", "q": "Quelle est la capitale de l'Australie (et non la ville la plus peuplée, Sydney) ?", "options": ["Sydney", "Melbourne", "Canberra", "Perth", "Brisbane"], "correct": 2, "exp": "Canberra, ville construite spécialement à cet effet au début du XXe siècle, est la capitale fédérale de l'Australie, bien que Sydney soit la ville la plus peuplée.", "id": 115}, {"cat": "Géo", "q": "Quel est le pays le plus vaste du monde par sa superficie ?", "options": ["Le Canada", "La Chine", "Les États-Unis", "La Russie", "Le Brésil"], "correct": 3, "exp": "La Russie est, avec plus de 17 millions de km², le plus vaste pays du monde, s'étendant sur onze fuseaux horaires.", "id": 116}, {"cat": "Géo", "q": "Combien de fuseaux horaires la France compte-t-elle officiellement, grâce à ses territoires d'outre-mer, ce qui en fait le pays au plus grand nombre de fuseaux horaires au monde ?", "options": ["6", "8", "10", "12", "15"], "correct": 3, "exp": "En comptant ses départements et collectivités d'outre-mer, la France couvre 12 fuseaux horaires, un record mondial devant les États-Unis et la Russie.", "id": 117}, {"cat": "Géo", "q": "Le canal de Panama relie quels deux océans ?", "options": ["L'Atlantique et l'océan Indien", "Le Pacifique et l'océan Indien", "L'Atlantique et le Pacifique", "L'Arctique et l'Atlantique", "Le Pacifique et l'Arctique"], "correct": 2, "exp": "Le canal de Panama, ouvert en 1914, relie l'océan Atlantique (mer des Caraïbes) à l'océan Pacifique, évitant le contournement du continent sud-américain.", "id": 118}, {"cat": "Géo", "q": "Le canal de Suez, situé en Égypte, relie :", "options": ["La mer Rouge et le golfe Persique", "La mer Méditerranée et la mer Rouge", "La mer Noire et la Méditerranée", "La mer Caspienne et la mer Noire", "L'océan Indien et la mer Rouge"], "correct": 1, "exp": "Le canal de Suez, inauguré en 1869, relie la mer Méditerranée à la mer Rouge, permettant d'éviter le contournement de l'Afrique par le cap de Bonne-Espérance.", "id": 119}, {"cat": "Géo", "q": "Le désert du Sahara, le plus grand désert chaud du monde, s'étend principalement sur quelle partie du continent africain ?", "options": ["L'Afrique australe", "L'Afrique de l'Est", "L'Afrique du Nord", "L'Afrique centrale", "L'ensemble du continent africain"], "correct": 2, "exp": "Le Sahara, avec environ 9 millions de km², s'étend sur l'Afrique du Nord, du Maroc à l'Égypte en passant notamment par l'Algérie, la Libye, le Mali et le Niger.", "id": 120}, {"cat": "Géo", "q": "Quels sont les deux pays qui partagent le plus grand nombre de frontières terrestres avec d'autres États (14 chacun) ?", "options": ["Les États-Unis et le Canada", "La Chine et la Russie", "Le Brésil et l'Inde", "La France et l'Allemagne", "L'Argentine et le Chili"], "correct": 1, "exp": "La Chine et la Russie sont, à égalité, les deux pays du monde qui possèdent le plus grand nombre de voisins frontaliers, avec 14 pays limitrophes chacun.", "id": 121}, {"cat": "Géo", "q": "Quel détroit sépare l'Europe (Espagne) de l'Afrique (Maroc) ?", "options": ["Le détroit du Bosphore", "Le détroit de Gibraltar", "Le détroit de Malacca", "Le détroit d'Ormuz", "Le détroit de Béring"], "correct": 1, "exp": "Le détroit de Gibraltar sépare la péninsule ibérique du Maroc, reliant l'océan Atlantique à la mer Méditerranée sur une largeur minimale d'environ 14 kilomètres.", "id": 122}, {"cat": "Géo", "q": "Quel est le point culminant de l'Amérique du Nord, situé en Alaska ?", "options": ["Le mont Whitney", "Le mont Rainier", "Le Denali (mont McKinley)", "Le Pic Orizaba", "Le mont Logan"], "correct": 2, "exp": "Le Denali, anciennement appelé mont McKinley, culmine à 6 190 mètres en Alaska et constitue le point culminant du continent nord-américain.", "id": 123}, {"cat": "Géo", "q": "Quel pays est devenu, en 2023, le pays le plus peuplé du monde, dépassant la Chine ?", "options": ["L'Indonésie", "Le Pakistan", "L'Inde", "Le Nigeria", "Le Bangladesh"], "correct": 2, "exp": "Selon les estimations de l'ONU, l'Inde a dépassé la Chine en 2023 pour devenir le pays le plus peuplé du monde, avec plus de 1,4 milliard d'habitants.", "id": 124}, {"cat": "Géo", "q": "Quelle est la capitale du Brésil (qui n'est ni Rio de Janeiro, ni São Paulo) ?", "options": ["Rio de Janeiro", "São Paulo", "Brasilia", "Salvador de Bahia", "Belo Horizonte"], "correct": 2, "exp": "Brasilia, ville planifiée inaugurée en 1960, est la capitale fédérale du Brésil, choisie pour favoriser le développement de l'intérieur du pays.", "id": 125}, {"cat": "Géo", "q": "Quelle est la plus grande étendue d'eau intérieure (n'ayant pas d'accès direct à un océan) du monde ?", "options": ["Le lac Baïkal", "La mer d'Aral", "La mer Caspienne", "Le lac Victoria", "Le lac Supérieur"], "correct": 2, "exp": "La mer Caspienne, bordée par la Russie, le Kazakhstan, le Turkménistan, l'Iran et l'Azerbaïdjan, est la plus grande étendue d'eau intérieure du monde, sans accès à un océan.", "id": 126}, {"cat": "Géo", "q": "Combien de pays sont aujourd'hui reconnus sur le continent africain ?", "options": ["42", "48", "54", "61", "70"], "correct": 2, "exp": "Le continent africain compte 54 pays reconnus par l'ONU (55 avec le Sahara occidental selon l'Union africaine), ce qui en fait le continent comptant le plus grand nombre d'États.", "id": 127}, {"cat": "Géo", "q": "Quel pays d'Afrique du Nord est à la fois bordé par la mer Méditerranée et par l'océan Atlantique ?", "options": ["L'Algérie", "La Tunisie", "La Libye", "Le Maroc", "L'Égypte"], "correct": 3, "exp": "Le Maroc est le seul pays d'Afrique du Nord à disposer d'un double accès maritime, avec des côtes sur la mer Méditerranée et sur l'océan Atlantique.", "id": 128}, {"cat": "Géo", "q": "Quelle chaîne de montagnes russe est traditionnellement considérée comme la frontière naturelle entre l'Europe et l'Asie ?", "options": ["Le Caucase", "Les Carpates", "L'Oural", "L'Altaï", "Les Tatras"], "correct": 2, "exp": "La chaîne de l'Oural, orientée nord-sud en Russie, est conventionnellement considérée comme la limite géographique séparant l'Europe de l'Asie.", "id": 129}, {"cat": "Géo", "q": "Quel pays constitue le plus vaste archipel du monde, avec plus de 17 000 îles ?", "options": ["Les Philippines", "Le Japon", "L'Indonésie", "La Papouasie-Nouvelle-Guinée", "La Malaisie"], "correct": 2, "exp": "L'Indonésie, avec plus de 17 000 îles réparties entre l'océan Indien et l'océan Pacifique, constitue le plus vaste archipel du monde.", "id": 130}, {"cat": "Géo", "q": "Combien de pays sont membres de l'Union européenne depuis le retrait du Royaume-Uni (Brexit) effectif en 2020 ?", "options": ["25", "26", "27", "28", "30"], "correct": 2, "exp": "Depuis le départ du Royaume-Uni en 2020, l'Union européenne compte 27 États membres.", "id": 131}, {"cat": "Géo", "q": "Quelle capitale d'Europe centrale, traversée par le Danube, est surnommée la « Perle du Danube » ?", "options": ["Vienne", "Budapest", "Bratislava", "Belgrade", "Bucarest"], "correct": 1, "exp": "Budapest, née de la fusion de Buda et Pest de part et d'autre du Danube, est souvent surnommée la « Perle du Danube ».", "id": 132}, {"cat": "Géo", "q": "Quel est le point le plus bas des terres émergées de la planète, situé entre Israël, la Cisjordanie et la Jordanie ?", "options": ["La dépression de Qattara", "La mer Morte", "Le lac Assal (Djibouti)", "La vallée de la Mort (États-Unis)", "Le bassin du Turfan (Chine)"], "correct": 1, "exp": "La mer Morte, à environ 430 mètres sous le niveau de la mer, constitue le point le plus bas des terres émergées, bordée par Israël, la Cisjordanie et la Jordanie.", "id": 133}, {"cat": "Géo", "q": "Quel est le plus grand océan de la planète en superficie ?", "options": ["L'océan Atlantique", "L'océan Indien", "L'océan Pacifique", "L'océan Arctique", "L'océan Austral"], "correct": 2, "exp": "L'océan Pacifique, avec plus de 165 millions de km², est de loin le plus vaste et le plus profond des océans du globe.", "id": 134}, {"cat": "Géo", "q": "Avec combien de pays le Brésil partage-t-il une frontière terrestre en Amérique du Sud ?", "options": ["6", "8", "10", "12", "Aucun, le Brésil est une île"], "correct": 2, "exp": "Le Brésil partage une frontière terrestre avec dix pays d'Amérique du Sud, tous les pays du continent à l'exception du Chili et de l'Équateur.", "id": 135}, {"cat": "Géo", "q": "Quelle mer est bordée notamment par la Russie, la Géorgie, la Turquie, la Bulgarie, la Roumanie et l'Ukraine ?", "options": ["La mer Baltique", "La mer Caspienne", "La mer Noire", "La mer d'Azov", "La mer Égée"], "correct": 2, "exp": "La mer Noire, enclavée entre l'Europe de l'Est, le Caucase et l'Anatolie, est bordée par six pays dont la Russie, l'Ukraine et la Turquie.", "id": 136}, {"cat": "Géo", "q": "Quel est le nom du plus long fleuve du monde, généralement cité devant l'Amazone selon la mesure classique ?", "options": ["Le Mississippi", "Le Nil", "Le Yangtsé", "Le Congo", "L'Amazone"], "correct": 1, "exp": "Le Nil, avec environ 6 650 km, est traditionnellement considéré comme le plus long fleuve du monde, bien que certaines études récentes donnent l'avantage à l'Amazone selon la méthode de mesure retenue.", "id": 137}, {"cat": "Géo", "q": "Quel est le plus petit État souverain du monde, tant par sa population que par sa superficie ?", "options": ["Monaco", "Saint-Marin", "La Cité du Vatican", "Nauru", "Le Liechtenstein"], "correct": 2, "exp": "La Cité du Vatican, avec environ 0,44 km² et moins de 900 habitants, est le plus petit État souverain reconnu au monde.", "id": 138}, {"cat": "Géo", "q": "Quelle capitale d'Europe est bâtie sur sept collines, tout comme Rome ?", "options": ["Athènes", "Lisbonne", "Édimbourg", "Prague", "Madrid"], "correct": 1, "exp": "Tout comme Rome, Lisbonne est traditionnellement présentée comme bâtie sur sept collines dominant le Tage.", "id": 139}, {"cat": "Sport", "q": "Qui a remporté le Ballon d'Or 2025, récompensant le meilleur footballeur de l'année ?", "options": ["Kylian Mbappé", "Vitinha", "Ousmane Dembélé", "Lamine Yamal", "Raphinha"], "correct": 2, "exp": "L'attaquant français du Paris Saint-Germain Ousmane Dembélé a remporté le Ballon d'Or 2025, récompensant sa saison exceptionnelle marquée par le sacre en Ligue des champions.", "id": 140}, {"cat": "Sport", "q": "Qui a remporté le Tour de France cycliste 2025, décrochant son quatrième titre ?", "options": ["Jonas Vingegaard", "Remco Evenepoel", "Tadej Pogacar", "Primoz Roglic", "Mathieu van der Poel"], "correct": 2, "exp": "Le Slovène Tadej Pogacar a remporté le Tour de France 2025, s'adjugeant son quatrième maillot jaune en dominant largement la course.", "id": 141}, {"cat": "Sport", "q": "Qui a remporté le simple messieurs de Roland-Garros 2025, au terme de la finale la plus longue de l'histoire du tournoi ?", "options": ["Jannik Sinner", "Novak Djokovic", "Carlos Alcaraz", "Alexander Zverev", "Casper Ruud"], "correct": 2, "exp": "Carlos Alcaraz a battu Jannik Sinner en cinq sets (dont un remontée après deux sets perdus) lors d'une finale record de 5h29, pour conserver son titre à Roland-Garros 2025.", "id": 142}, {"cat": "Sport", "q": "Qui a remporté le simple dames de Roland-Garros 2025, en battant Aryna Sabalenka en finale ?", "options": ["Iga Swiatek", "Coco Gauff", "Elena Rybakina", "Jessica Pegula", "Madison Keys"], "correct": 1, "exp": "L'Américaine Coco Gauff a remporté son premier titre à Roland-Garros en 2025, en battant la numéro 1 mondiale Aryna Sabalenka en finale.", "id": 143}, {"cat": "Sport", "q": "Quel club a remporté la Ligue des champions de l'UEFA en mai 2025, en écrasant l'Inter Milan 5 buts à 0 en finale ?", "options": ["Manchester City", "Le Real Madrid", "Le Paris Saint-Germain", "Le Bayern Munich", "Arsenal"], "correct": 2, "exp": "Le Paris Saint-Germain a remporté sa première Ligue des champions le 31 mai 2025, en écrasant l'Inter Milan 5-0 en finale à Munich.", "id": 144}, {"cat": "Sport", "q": "En février 2026, quel pays accueille les Jeux olympiques d'hiver, à Milan et Cortina d'Ampezzo ?", "options": ["La Suisse", "La France", "L'Italie", "L'Autriche", "L'Allemagne"], "correct": 2, "exp": "Les Jeux olympiques d'hiver 2026 se déroulent en Italie, conjointement organisés par les villes de Milan et de Cortina d'Ampezzo.", "id": 145}, {"cat": "Sport", "q": "Dans quelle ville se sont déroulés les Championnats du monde d'athlétisme en septembre 2025 ?", "options": ["Paris", "Eugene", "Budapest", "Tokyo", "Doha"], "correct": 3, "exp": "Les Championnats du monde d'athlétisme 2025 se sont tenus à Tokyo, au Japon, en septembre 2025.", "id": 146}, {"cat": "Sport", "q": "Qui a été sacré champion du monde du 100 mètres aux Mondiaux d'athlétisme de Tokyo 2025 ?", "options": ["Noah Lyles", "Oblique Seville", "Kishane Thompson", "Fred Kerley", "Letsile Tebogo"], "correct": 1, "exp": "Le Jamaïcain Oblique Seville a remporté le titre mondial du 100 mètres à Tokyo en 2025, devançant notamment l'Américain Noah Lyles, médaillé de bronze.", "id": 147}, {"cat": "Histoire", "q": "En 1519, quel roi de France a lancé la construction du château de Chambord, joyau de la Renaissance ?", "options": ["Louis XI", "Charles VIII", "François Ier", "Henri II", "Louis XIV"], "correct": 2, "exp": "François Ier, grand mécène de la Renaissance française, a fait bâtir à partir de 1519 le château de Chambord, l'un des plus vastes châteaux de la Loire.", "id": 148}, {"cat": "Histoire", "q": "L'année 1960, marquée par l'indépendance de 17 pays africains (dont le Sénégal, le Mali, le Cameroun ou Madagascar), est surnommée dans les manuels d'histoire :", "options": ["Le Printemps arabe", "L'année de l'Afrique", "La décennie noire", "Le grand schisme colonial", "L'année des indépendances silencieuses"], "correct": 1, "exp": "1960 est appelée « l'année de l'Afrique » car dix-sept pays africains, pour la plupart d'anciennes colonies françaises, ont accédé à l'indépendance cette année-là.", "id": 149}, {"cat": "Sport", "q": "Qui a été sacré champion du monde de Formule 1 en 2025, mettant fin à la domination de Max Verstappen ?", "options": ["Oscar Piastri", "Charles Leclerc", "Lando Norris", "George Russell", "Max Verstappen"], "correct": 2, "exp": "Le pilote britannique Lando Norris (McLaren) a été sacré champion du monde de Formule 1 2025, au terme d'une saison serrée face à son coéquipier Oscar Piastri et à Max Verstappen.", "id": 150}, {"cat": "Sport", "q": "Qui a remporté le tournoi de Wimbledon 2025 chez les messieurs, en battant Carlos Alcaraz en finale ?", "options": ["Novak Djokovic", "Jannik Sinner", "Alexander Zverev", "Taylor Fritz", "Daniil Medvedev"], "correct": 1, "exp": "L'Italien Jannik Sinner a décroché son premier titre à Wimbledon en 2025, en prenant sa revanche sur Carlos Alcaraz après sa défaite à Roland-Garros la même année.", "id": 151}, {"cat": "Sport", "q": "Quelle franchise a remporté le titre NBA 2025, à l'issue d'un septième match remporté face aux Pacers de l'Indiana ?", "options": ["Les Boston Celtics", "Le Thunder d'Oklahoma City", "Les Denver Nuggets", "Les Lakers de Los Angeles", "Les Knicks de New York"], "correct": 1, "exp": "Le Thunder d'Oklahoma City a remporté son tout premier titre NBA en juin 2025, en battant les Pacers de l'Indiana au terme d'un septième match haletant.", "id": 152}, {"cat": "Sport", "q": "Quelle équipe a remporté le Super Bowl LIX en février 2025, en battant largement les Chiefs de Kansas City ?", "options": ["Les 49ers de San Francisco", "Les Eagles de Philadelphie", "Les Bills de Buffalo", "Les Ravens de Baltimore", "Les Cowboys de Dallas"], "correct": 1, "exp": "Les Eagles de Philadelphie ont remporté le Super Bowl LIX le 9 février 2025, en dominant largement les Chiefs de Kansas City sur le score de 40 à 22.", "id": 153}, {"cat": "Sport", "q": "Qui a remporté le Vendée Globe 2024-2025, prestigieuse course à la voile en solitaire et sans escale autour du monde ?", "options": ["Yannick Bestaven", "Charlie Dalin", "Jérémie Beyou", "Thomas Ruyant", "Sébastien Simon"], "correct": 1, "exp": "Le skipper français Charlie Dalin a remporté le Vendée Globe 2024-2025, établissant un nouveau record de temps sur ce tour du monde en solitaire.", "id": 154}, {"cat": "Sport", "q": "Quelle sélection nationale a été sacrée championne d'Europe de basket-ball (EuroBasket) en septembre 2025, en battant la Turquie en finale ?", "options": ["La France", "L'Espagne", "La Serbie", "L'Allemagne", "La Lituanie"], "correct": 3, "exp": "L'Allemagne a conservé son titre continental en remportant l'EuroBasket 2025 face à la Turquie, décrochant ainsi son deuxième titre européen.", "id": 155}, {"cat": "Sport", "q": "En 2024, quel trophée individuel Victor Wembanyama a-t-il remporté lors de sa première saison en NBA ?", "options": ["Le titre de MVP des finales", "Le trophée de meilleur défenseur de l'année", "Le titre de meilleur rookie de l'année (Rookie of the Year)", "Le trophée du sixième homme de l'année", "Le titre de MVP de la saison régulière"], "correct": 2, "exp": "Le Français Victor Wembanyama a été élu meilleur rookie de la saison NBA 2023-2024, confirmant les immenses attentes placées en lui.", "id": 156}, {"cat": "Sport", "q": "Quelle est la mascotte officielle des Jeux olympiques et paralympiques de Paris 2024, inspirée du bonnet phrygien ?", "options": ["Les Gaulois", "Les Phryges", "Les Marianne", "Les Coq'in", "Les Éclats"], "correct": 1, "exp": "Les Phryges, mascottes des Jeux de Paris 2024, s'inspirent du bonnet phrygien, symbole républicain porté par Marianne.", "id": 157}, {"cat": "Sport", "q": "Au tableau des médailles d'or des Jeux olympiques de Paris 2024, quels pays ont terminé à égalité en tête, avec 40 médailles d'or chacun ?", "options": ["La France et le Royaume-Uni", "La Chine et le Japon", "Les États-Unis et la Chine", "La Russie et l'Allemagne", "L'Australie et les Pays-Bas"], "correct": 2, "exp": "Les États-Unis et la Chine ont terminé à égalité avec 40 médailles d'or chacun aux JO de Paris 2024, les États-Unis l'emportant néanmoins au nombre total de médailles.", "id": 158}, {"cat": "Sport", "q": "En football, quel événement l'équipe de France féminine ou masculine attend-elle en 2026, organisé conjointement par trois pays d'Amérique du Nord ?", "options": ["La Coupe du monde de football, aux États-Unis, au Canada et au Mexique", "La Coupe du monde de football, au Brésil", "La Coupe d'Afrique des Nations", "La Copa América élargie", "Les Jeux panaméricains"], "correct": 0, "exp": "La Coupe du monde de football 2026 sera organisée conjointement par les États-Unis, le Canada et le Mexique, avec pour la première fois 48 équipes qualifiées.", "id": 159}, {"cat": "Culture", "q": "Le prix Nobel de littérature 2025 a été attribué à un écrivain hongrois réputé pour son style dense et ses phrases interminables. Qui est-il ?", "options": ["Imre Kertész", "Péter Nádas", "László Krasznahorkai", "Sándor Márai", "György Konrád"], "correct": 2, "exp": "László Krasznahorkai, auteur notamment de « Satantango », a reçu le prix Nobel de littérature 2025 pour une œuvre visionnaire qui, selon le jury, réaffirme la puissance de l'art face à la terreur apocalyptique.", "id": 160}, {"cat": "Culture", "q": "Le prix Goncourt 2025 a été décerné à Laurent Mauvignier. Quel est le titre du roman récompensé ?", "options": ["Continuer", "Des hommes", "La Maison vide", "Histoires de la nuit", "Ce que je sais de Vera Candida"], "correct": 2, "exp": "Laurent Mauvignier a reçu le prix Goncourt 2025 pour « La Maison vide », un roman largement autobiographique sur son histoire familiale.", "id": 161}, {"cat": "Culture", "q": "En 2025, la Palme d'or du Festival de Cannes a récompensé un film du réalisateur iranien Jafar Panahi. Quel en est le titre français ?", "options": ["Le Cercle", "Taxi Téhéran", "Un simple accident", "Trois visages", "Hors-la-loi"], "correct": 2, "exp": "« Un simple accident » (« It Was Just an Accident »), de Jafar Panahi, a remporté la Palme d'or 2025, saluant le parcours de ce cinéaste plusieurs fois emprisonné dans son pays.", "id": 162}, {"cat": "Culture", "q": "En 2024, quel film américain, réalisé par Sean Baker et centré sur une escort new-yorkaise, a remporté la Palme d'or à Cannes avant de triompher aux Oscars ?", "options": ["Poor Things", "Anora", "The Substance", "Emilia Pérez", "Challengers"], "correct": 1, "exp": "« Anora », de Sean Baker, a remporté la Palme d'or 2024 puis l'Oscar du meilleur film en 2025, un doublé rare.", "id": 163}, {"cat": "Culture", "q": "Qui a créé le personnage de Rouletabille, jeune journaliste-détective, dans des romans policiers du début du XXe siècle ?", "options": ["Maurice Leblanc", "Gaston Leroux", "Georges Simenon", "Jules Verne", "Arthur Conan Doyle"], "correct": 1, "exp": "Rouletabille est un personnage créé par Gaston Leroux, notamment dans « Le Mystère de la chambre jaune » (1907) et « Le Parfum de la dame en noir » (1908).", "id": 164}, {"cat": "Culture", "q": "Le tableau « Guernica » de Pablo Picasso, peint en 1937, dénonce :", "options": ["Les horreurs de la Première Guerre mondiale", "Le bombardement de la ville basque de Guernica pendant la guerre civile espagnole", "La colonisation de l'Afrique", "La révolution russe de 1917", "Les persécutions religieuses du Moyen Âge"], "correct": 1, "exp": "Peint en 1937, « Guernica » dénonce le bombardement de la ville basque de Guernica par l'aviation allemande et italienne, allié du camp franquiste pendant la guerre civile espagnole.", "id": 165}, {"cat": "Culture", "q": "Quel est le véritable nom de naissance de Molière, dramaturge du Grand Siècle ?", "options": ["Jean Racine", "Pierre Corneille", "Jean-Baptiste Poquelin", "François Rabelais", "Nicolas Boileau"], "correct": 2, "exp": "Molière, de son vrai nom Jean-Baptiste Poquelin, est né à Paris en 1622 et reste l'un des plus grands dramaturges de la langue française.", "id": 166}, {"cat": "Culture", "q": "Quel écrivain français est l'auteur des « Misérables » et de « Notre-Dame de Paris » ?", "options": ["Honoré de Balzac", "Victor Hugo", "Émile Zola", "Gustave Flaubert", "Alexandre Dumas"], "correct": 1, "exp": "Victor Hugo, chef de file du romantisme français, est l'auteur de ces deux romans majeurs, ainsi que de nombreux poèmes et discours politiques.", "id": 167}, {"cat": "Culture", "q": "Quel courant pictural doit son nom au tableau de Claude Monet « Impression, soleil levant » (1872) ?", "options": ["Le cubisme", "Le fauvisme", "L'impressionnisme", "Le surréalisme", "Le pointillisme"], "correct": 2, "exp": "Le terme « impressionnisme » est né d'une critique moqueuse visant le tableau de Claude Monet « Impression, soleil levant », exposé en 1874.", "id": 168}, {"cat": "Culture", "q": "Quel écrivain britannique est l'auteur du roman dystopique « 1984 », publié en 1949 ?", "options": ["Aldous Huxley", "George Orwell", "H.G. Wells", "Ray Bradbury", "J.R.R. Tolkien"], "correct": 1, "exp": "George Orwell est l'auteur de « 1984 », roman dystopique décrivant une société totalitaire sous surveillance permanente, dont le vocabulaire (« Big Brother ») est passé dans le langage courant.", "id": 169}, {"cat": "Culture", "q": "Quel musée est le plus visité au monde, avec plusieurs millions de visiteurs chaque année à Paris ?", "options": ["Le British Museum", "Le Musée du Louvre", "Le Metropolitan Museum of Art", "Les Musées du Vatican", "Le Prado"], "correct": 1, "exp": "Le Louvre, à Paris, est le musée le plus visité au monde, abritant notamment la Joconde de Léonard de Vinci.", "id": 170}, {"cat": "Culture", "q": "Quelle récompense suprême est décernée chaque année au Festival de Cannes pour le meilleur film ?", "options": ["L'Ours d'or", "Le Lion d'or", "La Palme d'or", "Le César du meilleur film", "L'Oscar du meilleur film"], "correct": 2, "exp": "La Palme d'or est la plus haute distinction décernée en compétition officielle au Festival de Cannes, tandis que l'Ours d'or et le Lion d'or récompensent respectivement les festivals de Berlin et de Venise.", "id": 171}, {"cat": "Culture", "q": "En quelle année le cardinal de Richelieu a-t-il fondé l'Académie française, chargée de veiller sur la langue française ?", "options": ["1530", "1635", "1789", "1815", "1900"], "correct": 1, "exp": "L'Académie française a été fondée en 1635 par le cardinal de Richelieu, ministre du roi Louis XIII, afin de fixer et de perfectionner la langue française.", "id": 172}, {"cat": "Culture", "q": "Quel sculpteur français est l'auteur du « Penseur », l'une des œuvres les plus célèbres au monde ?", "options": ["Antoine Bourdelle", "Auguste Rodin", "Camille Claudel", "Aristide Maillol", "Constantin Brâncuși"], "correct": 1, "exp": "« Le Penseur » est une sculpture d'Auguste Rodin, initialement conçue comme partie de son ensemble monumental « La Porte de l'Enfer ».", "id": 173}, {"cat": "Culture", "q": "Quel écrivain et philosophe français, prix Nobel de littérature 1957, est l'auteur de « L'Étranger » et du « Mythe de Sisyphe » ?", "options": ["Jean-Paul Sartre", "Albert Camus", "André Malraux", "Simone de Beauvoir", "Emmanuel Levinas"], "correct": 1, "exp": "Albert Camus, figure majeure de l'existentialisme et de la philosophie de l'absurde, a reçu le prix Nobel de littérature en 1957.", "id": 174}, {"cat": "Sciences", "q": "Selon le service européen Copernicus, l'année 2024 a battu un record climatique inquiétant. Lequel ?", "options": ["L'année la plus froide depuis 50 ans", "L'année la plus chaude jamais enregistrée sur Terre", "L'année avec le moins de précipitations mondiales", "L'année avec le plus faible niveau de CO2 atmosphérique", "L'année avec le plus grand nombre d'ouragans"], "correct": 1, "exp": "2024 a été déclarée année la plus chaude jamais enregistrée par Copernicus, avec une température moyenne mondiale dépassant 1,5°C au-dessus des niveaux préindustriels.", "id": 175}, {"cat": "Sciences", "q": "Le prix Nobel de physique 2025 a récompensé trois chercheurs, dont le Français Michel Devoret, pour leurs travaux sur :", "options": ["La détection des ondes gravitationnelles", "Les effets quantiques macroscopiques dans les circuits supraconducteurs", "La fusion nucléaire par confinement magnétique", "L'intelligence artificielle appliquée à la physique des particules", "La découverte d'exoplanètes habitables"], "correct": 1, "exp": "Michel Devoret, John Clarke et John Martinis ont reçu le prix Nobel de physique 2025 pour la découverte de l'effet tunnel quantique macroscopique et de la quantification de l'énergie dans des circuits électriques supraconducteurs.", "id": 176}, {"cat": "Sciences", "q": "Le prix Nobel de chimie 2025 a récompensé des travaux sur des matériaux poreux capables de stocker des gaz ou de capter le CO2. Comment les nomme-t-on ?", "options": ["Les polymères conducteurs", "Les structures métallo-organiques (MOF)", "Les nanotubes de carbone", "Les cristaux liquides", "Les aérogels de silice"], "correct": 1, "exp": "Susumu Kitagawa, Richard Robson et Omar Yaghi ont reçu le Nobel de chimie 2025 pour le développement des structures métallo-organiques (MOF), matériaux poreux aux multiples applications (captage du CO2, stockage de gaz, purification de l'eau).", "id": 177}, {"cat": "Sciences", "q": "Le prix Nobel de médecine 2025 a récompensé des découvertes sur un mécanisme essentiel du système immunitaire. Lequel ?", "options": ["La mémoire immunitaire des vaccins à ARN messager", "La tolérance immunitaire périphérique (lymphocytes T régulateurs)", "Le mécanisme du rejet de greffe", "La régénération des cellules souches", "L'immunité innée face aux virus"], "correct": 1, "exp": "Mary Brunkow, Fred Ramsdell et Shimon Sakaguchi ont été récompensés pour la découverte des lymphocytes T régulateurs et de la tolérance immunitaire périphérique, qui empêche le système immunitaire d'attaquer l'organisme lui-même.", "id": 178}, {"cat": "Sciences", "q": "Que signifie le sigle GIEC, organisme de référence sur le changement climatique ?", "options": ["Groupe d'experts intergouvernemental sur l'évolution du climat", "Groupement international pour l'énergie et le climat", "Grand institut d'études sur le climat", "Groupe d'ingénieurs pour l'environnement et le climat", "Groupement international des experts en climatologie"], "correct": 0, "exp": "Le GIEC (Groupe d'experts intergouvernemental sur l'évolution du climat), créé en 1988 sous l'égide de l'ONU, synthétise les connaissances scientifiques sur le changement climatique.", "id": 179}, {"cat": "Sciences", "q": "En août 2024, l'Organisation mondiale de la santé a déclaré une urgence de santé publique de portée internationale concernant quelle maladie ?", "options": ["La Covid-19", "Le choléra", "La mpox (variole simienne)", "La dengue", "La grippe aviaire"], "correct": 2, "exp": "Face à la recrudescence de cas en Afrique, l'OMS a déclaré le 14 août 2024 une urgence de santé publique de portée internationale liée à la mpox (variole simienne).", "id": 180}, {"cat": "Sciences", "q": "En janvier 2025, quelle start-up chinoise d'intelligence artificielle a provoqué une chute spectaculaire des valeurs technologiques à Wall Street, en dévoilant un modèle performant et bon marché ?", "options": ["Alibaba Cloud", "Baidu", "DeepSeek", "Tencent AI", "ByteDance"], "correct": 2, "exp": "L'annonce du modèle d'IA de DeepSeek, jugé très performant pour un coût de développement réduit, a provoqué fin janvier 2025 une chute boursière massive des valeurs technologiques occidentales, dont Nvidia.", "id": 181}, {"cat": "Sciences", "q": "Le règlement européen sur l'intelligence artificielle (AI Act), premier cadre juridique complet au monde sur l'IA, est entré en vigueur en :", "options": ["Janvier 2023", "Août 2024", "Décembre 2025", "Mars 2026", "Il n'est pas encore entré en vigueur"], "correct": 1, "exp": "L'AI Act, règlement européen encadrant l'intelligence artificielle selon une approche fondée sur les risques, est entré en vigueur le 1er août 2024, avec une application progressive de ses dispositions.", "id": 182}, {"cat": "Sciences", "q": "En janvier 2024, la société Neuralink d'Elon Musk a annoncé une première mondiale. Laquelle ?", "options": ["Le premier vaccin à ARN messager contre le cancer", "La pose du premier implant cérébral de la société sur un être humain", "Le premier bébé né par utérus artificiel", "La première greffe de rein de porc génétiquement modifié", "Le premier robot chirurgical autonome"], "correct": 1, "exp": "Neuralink a annoncé le 29 janvier 2024 avoir posé son premier implant cérébral (interface homme-machine) sur un patient humain, capable notamment de contrôler un curseur d'ordinateur par la pensée.", "id": 183}, {"cat": "Sciences", "q": "En France, quelle énergie assure environ 65 à 70 % de la production totale d'électricité ?", "options": ["Le charbon", "Le gaz naturel", "Le nucléaire", "L'éolien", "Le solaire"], "correct": 2, "exp": "La France se distingue par la place prépondérante du nucléaire dans son mix électrique, qui assure environ les deux tiers de sa production d'électricité.", "id": 184}, {"cat": "Sciences", "q": "Le méga-projet de réacteur expérimental de fusion nucléaire ITER, rassemblant 35 pays, est en construction dans quel pays ?", "options": ["Les États-Unis", "La France", "La Chine", "La Russie", "L'Allemagne"], "correct": 1, "exp": "Le réacteur expérimental ITER, destiné à démontrer la faisabilité de la fusion nucléaire comme source d'énergie, est en construction à Cadarache, dans le sud de la France.", "id": 185}, {"cat": "Sciences", "q": "Selon le protocole des émissions de gaz à effet de serre (GHG Protocol), que désignent les émissions de « scope 3 » d'une entreprise ?", "options": ["Les émissions directes issues de ses propres installations", "Les émissions indirectes liées à sa consommation d'énergie", "Toutes les autres émissions indirectes de sa chaîne de valeur (fournisseurs, usage des produits, etc.)", "Les émissions liées uniquement au transport de ses salariés", "Les émissions compensées par des crédits carbone"], "correct": 2, "exp": "Le scope 3 regroupe l'ensemble des émissions indirectes de la chaîne de valeur d'une entreprise (achats, transport, utilisation et fin de vie des produits), souvent les plus importantes mais aussi les plus difficiles à mesurer.", "id": 186}, {"cat": "Sciences", "q": "Quel objectif chiffré, dit « 30x30 », a été fixé par l'accord de Kunming-Montréal sur la biodiversité en décembre 2022 ?", "options": ["Réduire de 30 % les déchets plastiques d'ici 2030", "Protéger 30 % des terres et des mers de la planète d'ici 2030", "Planter 30 milliards d'arbres d'ici 2030", "Réduire de 30 % les émissions de CO2 d'ici 2030", "Consacrer 30 % du PIB mondial à l'environnement d'ici 2030"], "correct": 1, "exp": "L'accord de Kunming-Montréal, adopté lors de la COP15 biodiversité, fixe l'objectif de protéger au moins 30 % des terres, des eaux intérieures et des zones marines de la planète d'ici 2030.", "id": 187}, {"cat": "Sciences", "q": "Quelle agence spatiale prévoit, avec le programme Artemis, de ramener des astronautes sur la Lune dans les prochaines années ?", "options": ["L'ESA (Europe)", "La NASA (États-Unis)", "Roscosmos (Russie)", "La CNSA (Chine)", "La JAXA (Japon)"], "correct": 1, "exp": "Le programme Artemis de la NASA vise à ramener des astronautes américains sur la Lune, avec pour ambition d'y établir à terme une présence durable, en vue de futures missions vers Mars.", "id": 188}, {"cat": "Sciences", "q": "Quelle entreprise développe la fusée réutilisable géante Starship, dont le lanceur est parfois rattrapé par des « baguettes » (chopsticks) de la tour de lancement ?", "options": ["Blue Origin", "SpaceX", "Boeing", "Arianespace", "Rocket Lab"], "correct": 1, "exp": "SpaceX, entreprise fondée par Elon Musk, développe le lanceur géant réutilisable Starship, dont le premier étage (Super Heavy) a été rattrapé à plusieurs reprises par les bras de la tour de lancement.", "id": 189}, {"cat": "Sport", "q": "En janvier 2024, l'équipe de France masculine de handball a été sacrée championne d'Europe (EHF Euro), en battant quelle équipe en finale ?", "options": ["L'Allemagne", "Le Danemark", "L'Espagne", "La Croatie", "La Suède"], "correct": 1, "exp": "Les Bleus du handball ont remporté le titre de champion d'Europe en janvier 2024 en battant le Danemark en finale, au terme d'un match spectaculaire.", "id": 190}, {"cat": "Sport", "q": "Après l'édition 2023 organisée en France, quel pays accueillera la prochaine Coupe du monde de rugby à XV masculine, en 2027 ?", "options": ["L'Angleterre", "L'Afrique du Sud", "L'Australie", "La Nouvelle-Zélande", "L'Argentine"], "correct": 2, "exp": "L'Australie accueillera la Coupe du monde de rugby à XV en 2027, quatre ans après l'édition organisée en France en 2023.", "id": 191}, {"cat": "Culture", "q": "Quelle philosophe et écrivaine française a publié en 1949 « Le Deuxième Sexe », ouvrage fondateur du féminisme moderne ?", "options": ["Simone Veil", "Simone de Beauvoir", "Hannah Arendt", "Colette", "Marguerite Duras"], "correct": 1, "exp": "Simone de Beauvoir a publié « Le Deuxième Sexe » en 1949, un essai devenu une référence majeure de la pensée féministe, où elle affirme notamment qu'« on ne naît pas femme, on le devient ».", "id": 192}, {"cat": "Culture", "q": "Quel fabuliste français du XVIIe siècle est l'auteur du « Corbeau et le Renard » et de nombreuses autres fables restées célèbres ?", "options": ["Charles Perrault", "Jean de La Fontaine", "Nicolas Boileau", "Jean Racine", "Madame de La Fayette"], "correct": 1, "exp": "Jean de La Fontaine, à travers ses « Fables » publiées à partir de 1668, met en scène des animaux pour délivrer des leçons morales, dont « Le Corbeau et le Renard » reste l'une des plus célèbres.", "id": 193}, {"cat": "Culture", "q": "Le tableau « La Nuit étoilée », l'une des œuvres les plus célèbres au monde, a été peint par :", "options": ["Claude Monet", "Paul Cézanne", "Vincent van Gogh", "Edvard Munch", "Paul Gauguin"], "correct": 2, "exp": "« La Nuit étoilée » a été peinte par Vincent van Gogh en 1889 et est aujourd'hui conservée au Museum of Modern Art (MoMA) de New York.", "id": 194}, {"cat": "Culture", "q": "Quel écrivain espagnol du Siècle d'or est l'auteur de « Don Quichotte », souvent considéré comme le premier roman moderne ?", "options": ["Federico García Lorca", "Miguel de Cervantès", "Lope de Vega", "Gabriel García Márquez", "Pedro Calderón de la Barca"], "correct": 1, "exp": "Miguel de Cervantès a publié « Don Quichotte » au début du XVIIe siècle (1605-1615), roman fondateur souvent considéré comme la première grande œuvre romanesque moderne.", "id": 195}, {"cat": "Culture", "q": "Quel compositeur français impressionniste est l'auteur de « Clair de lune » et de « La Mer » ?", "options": ["Maurice Ravel", "Claude Debussy", "Camille Saint-Saëns", "Hector Berlioz", "Gabriel Fauré"], "correct": 1, "exp": "Claude Debussy, figure majeure de l'impressionnisme musical, est l'auteur de « Clair de lune » (extrait de la Suite bergamasque) et du poème symphonique « La Mer ».", "id": 196}, {"cat": "Sciences", "q": "Qui a élaboré, en 1869, la première version du tableau périodique des éléments chimiques ?", "options": ["Antoine Lavoisier", "Dmitri Mendeleïev", "Marie Curie", "Ernest Rutherford", "Niels Bohr"], "correct": 1, "exp": "Le chimiste russe Dmitri Mendeleïev a présenté en 1869 une classification périodique des éléments chimiques, organisée selon leur masse atomique et leurs propriétés, encore utilisée (sous une forme modernisée) aujourd'hui.", "id": 197}, {"cat": "Sciences", "q": "Quelle est, approximativement, la vitesse de la lumière dans le vide ?", "options": ["30 000 km/s", "150 000 km/s", "300 000 km/s", "1 000 000 km/s", "3 000 000 km/s"], "correct": 2, "exp": "La vitesse de la lumière dans le vide est d'environ 299 792 km/s, arrondie à 300 000 km/s, une constante physique fondamentale.", "id": 198}, {"cat": "Sciences", "q": "En 1953, la structure en double hélice de quelle molécule essentielle au vivant a été décrite par James Watson et Francis Crick, à partir notamment des travaux de Rosalind Franklin ?", "options": ["L'ARN messager", "L'ADN", "L'hémoglobine", "Le collagène", "L'insuline"], "correct": 1, "exp": "Watson et Crick ont publié en 1953 le modèle en double hélice de l'ADN, s'appuyant notamment sur les clichés de diffraction aux rayons X réalisés par Rosalind Franklin.", "id": 199}, {"cat": "Sciences", "q": "Quelle est la planète la plus proche du Soleil dans le système solaire ?", "options": ["Vénus", "La Terre", "Mercure", "Mars", "Jupiter"], "correct": 2, "exp": "Mercure est la planète la plus proche du Soleil et la plus petite du système solaire.", "id": 200}, {"cat": "Sciences", "q": "Le prix Nobel de médecine 2023 a récompensé la mise au point d'une technologie qui a permis les vaccins à ARN messager contre la Covid-19. Qui en sont les lauréats ?", "options": ["Katalin Karikó et Drew Weissman", "James Watson et Francis Crick", "Emmanuelle Charpentier et Jennifer Doudna", "Tu Youyou et Barry Marshall", "Shinya Yamanaka et John Gurdon"], "correct": 0, "exp": "Katalin Karikó et Drew Weissman ont reçu le prix Nobel de médecine 2023 pour leurs découvertes sur les modifications des bases de l'ARN messager, qui ont permis le développement rapide des vaccins à ARNm contre la Covid-19.", "id": 201}];
+
+const CATS = {
+  "France":   {label:"Actu France",        color:"var(--c-france)"},
+  "Monde":    {label:"Actu internationale",color:"var(--c-monde)"},
+  "Éco":      {label:"Économie & entreprise",color:"var(--c-eco)"},
+  "Histoire": {label:"Histoire",           color:"var(--c-histoire)"},
+  "Géo":      {label:"Géographie",         color:"var(--c-geo)"},
+  "Sport":    {label:"Sport",              color:"var(--c-sport)"},
+  "Culture":  {label:"Culture & arts",     color:"var(--c-culture)"},
+  "Sciences": {label:"Sciences & environnement",color:"var(--c-sciences)"},
+};
+
+const QBYID = {};
+QUESTIONS.forEach(q => QBYID[q.id] = q);
+const ALL_IDS = QUESTIONS.map(q => q.id);
+
+/* ---------------- persistence ---------------- */
+const LS_KEY = "iae_blitz_progress_v1";
+function defaultProgress(){
+  return {
+    streak:0, lastDate:null, bestScore:0, testsTaken:0,
+    catStats:{}, wrongIds:[], deck:[], deckPos:0, history:[]
+  };
+}
+let progress = defaultProgress();
+
+function loadLocal(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(raw) return Object.assign(defaultProgress(), JSON.parse(raw));
+  }catch(e){}
+  return defaultProgress();
+}
+function saveLocal(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(progress)); }catch(e){}
+}
+async function saveProgress(){
+  saveLocal();
+}
+function initProgress(){
+  progress = loadLocal();
+  renderHome();
+}
+
+/* ---------------- theme ---------------- */
+function initTheme(){
+  let stored = null;
+  try{ stored = localStorage.getItem("iae_blitz_theme"); }catch(e){}
+  if(stored) document.documentElement.setAttribute("data-theme", stored);
+  updateThemeIcon();
+}
+function updateThemeIcon(){
+  const attr = document.documentElement.getAttribute("data-theme");
+  const cur = attr || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const icon = document.getElementById("themeIcon");
+  if(cur === "dark"){
+    icon.innerHTML = '<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>';
+  } else {
+    icon.innerHTML = '<path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7"/>';
+  }
+}
+document.getElementById("themeToggle").addEventListener("click", () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const mq = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  let next;
+  if(!cur) next = mq ? "light" : "dark";
+  else if(cur === "dark") next = "light";
+  else next = "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try{ localStorage.setItem("iae_blitz_theme", next); }catch(e){}
+  updateThemeIcon();
+});
+
+/* ---------------- helpers ---------------- */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+function todayStr(){
+  return new Date().toISOString().slice(0,10);
+}
+function fmtTime(sec){
+  const m = Math.floor(sec/60), s = sec%60;
+  return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+/* ---------------- home rendering ---------------- */
+function renderCatLegend(){
+  const el = document.getElementById("catLegend");
+  el.innerHTML = "";
+  const counts = {};
+  QUESTIONS.forEach(q => counts[q.cat] = (counts[q.cat]||0)+1);
+  Object.keys(CATS).forEach(cat => {
+    const chip = document.createElement("span");
+    chip.className = "cat-chip";
+    chip.innerHTML = `<span class="cat-dot" style="background:${CATS[cat].color}"></span>${CATS[cat].label} <b>${counts[cat]||0}</b>`;
+    el.appendChild(chip);
+  });
+}
+
+function renderHome(){
+  document.getElementById("statStreak").textContent = progress.streak || 0;
+  document.getElementById("statBest").innerHTML = (progress.bestScore||0)*2 + '<span style="font-size:.6em;color:var(--ink-soft)">/100</span>';
+  document.getElementById("statTests").textContent = progress.testsTaken || 0;
+
+  const wrongCount = (progress.wrongIds||[]).length;
+  const btnReview = document.getElementById("btnReview");
+  btnReview.disabled = wrongCount === 0;
+  document.getElementById("reviewTitle").textContent = wrongCount ? `Réviser mes erreurs (${wrongCount})` : "Réviser mes erreurs";
+  document.getElementById("reviewDesc").textContent = wrongCount
+    ? "Repasse sur les questions déjà ratées pour les ancrer"
+    : "Aucune erreur enregistrée pour l'instant";
+
+  const seen = Math.min(progress.deckPos||0, ALL_IDS.length);
+  const pct = Math.round((seen/ALL_IDS.length)*100);
+  document.getElementById("deckBar").style.width = pct+"%";
+  document.getElementById("deckLabel").textContent = `${seen} / ${ALL_IDS.length} questions vues dans ce cycle`;
+
+  renderCatLegend();
+}
+
+/* ---------------- mode switch ---------------- */
+let currentMode = "bachotage";
+document.querySelectorAll(".mode-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".mode-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    currentMode = btn.dataset.mode;
+  });
+});
+
+/* ---------------- deck drawing ---------------- */
+function drawNewTestIds(n){
+  let deck = progress.deck || [];
+  let pos = progress.deckPos || 0;
+  if(!deck.length || pos + n > deck.length){
+    deck = shuffle(ALL_IDS);
+    pos = 0;
+  }
+  const ids = deck.slice(pos, pos+n);
+  progress.deck = deck;
+  progress.deckPos = pos + n;
+  return ids;
+}
+
+/* ---------------- quiz state ---------------- */
+let quiz = null; // {ids, idx, answers[], mode, isReview, timerInterval, remaining}
+
+function startTest(ids, mode, isReview){
+  quiz = {
+    ids: ids,
+    idx: 0,
+    answers: new Array(ids.length).fill(null),
+    mode: mode,
+    isReview: !!isReview,
+    remaining: 45*60,
+    timerHandle: null
+  };
+  document.getElementById("view-home").hidden = true;
+  document.getElementById("view-results").hidden = true;
+  document.getElementById("view-quiz").hidden = false;
+  const timerEl = document.getElementById("quizTimer");
+  if(mode === "examen"){
+    timerEl.hidden = false;
+    startTimer();
+  } else {
+    timerEl.hidden = true;
+  }
+  renderQuestion();
+}
+
+function startTimer(){
+  clearInterval(quiz.timerHandle);
+  quiz.timerHandle = setInterval(() => {
+    quiz.remaining--;
+    const txt = document.getElementById("quizTimerText");
+    const timerBox = document.getElementById("quizTimer");
+    txt.textContent = fmtTime(Math.max(0,quiz.remaining));
+    timerBox.classList.toggle("ok", quiz.remaining > 300);
+    if(quiz.remaining <= 0){
+      clearInterval(quiz.timerHandle);
+      finishTest();
+    }
+  }, 1000);
+}
+
+function renderQuestion(){
+  const q = QBYID[quiz.ids[quiz.idx]];
+  document.getElementById("quizCount").textContent = (quiz.idx+1)+"/"+quiz.ids.length;
+  document.getElementById("quizProgressFill").style.width = Math.round(((quiz.idx)/quiz.ids.length)*100)+"%";
+
+  const tag = document.getElementById("qTag");
+  tag.querySelector(".cat-dot").style.background = CATS[q.cat].color;
+  tag.querySelector("span:last-child").textContent = CATS[q.cat].label;
+  document.getElementById("qText").textContent = q.q;
+
+  const optList = document.getElementById("qOptions");
+  optList.innerHTML = "";
+  const prevAnswer = quiz.answers[quiz.idx];
+  q.options.forEach((opt, i) => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.innerHTML = `<span class="opt-bubble">${i+1}</span><span>${opt}</span>`;
+    b.addEventListener("click", () => selectOption(i));
+    optList.appendChild(b);
+  });
+
+  document.getElementById("qExplain").hidden = true;
+  document.getElementById("btnNext").disabled = true;
+  document.getElementById("btnNext").textContent = quiz.idx === quiz.ids.length-1 ? "Terminer" : "Suivant";
+
+  if(prevAnswer !== null){
+    applyAnswerVisuals(prevAnswer);
+    document.getElementById("btnNext").disabled = false;
+  }
+}
+
+function selectOption(i){
+  if(quiz.answers[quiz.idx] !== null) return; // already answered
+  quiz.answers[quiz.idx] = i;
+  applyAnswerVisuals(i);
+  document.getElementById("btnNext").disabled = false;
+}
+
+function applyAnswerVisuals(selectedIdx){
+  const q = QBYID[quiz.ids[quiz.idx]];
+  const opts = document.querySelectorAll("#qOptions .opt");
+  const revealCorrectness = (quiz.mode === "bachotage") || quiz.isReview;
+  opts.forEach((el, i) => {
+    el.disabled = true;
+    if(revealCorrectness){
+      if(i === q.correct) el.classList.add("correct");
+      else if(i === selectedIdx) el.classList.add("incorrect");
+    } else if(i === selectedIdx){
+      el.classList.add("selected");
+    }
+  });
+  if(revealCorrectness){
+    const ex = document.getElementById("qExplain");
+    ex.hidden = false;
+    ex.innerHTML = `<b>Bonne réponse : ${q.options[q.correct]}.</b><br>${q.exp}`;
+  }
+}
+
+document.getElementById("btnNext").addEventListener("click", () => {
+  if(quiz.idx < quiz.ids.length-1){
+    quiz.idx++;
+    renderQuestion();
+  } else {
+    finishTest();
+  }
+});
+
+document.getElementById("btnQuit").addEventListener("click", () => {
+  document.getElementById("confirmOverlay").hidden = false;
+});
+document.getElementById("confirmCancel").addEventListener("click", () => {
+  document.getElementById("confirmOverlay").hidden = true;
+});
+document.getElementById("confirmQuit").addEventListener("click", () => {
+  document.getElementById("confirmOverlay").hidden = true;
+  if(quiz && quiz.timerHandle) clearInterval(quiz.timerHandle);
+  quiz = null;
+  document.getElementById("view-quiz").hidden = true;
+  document.getElementById("view-home").hidden = false;
+  renderHome();
+});
+
+/* ---------------- finish + scoring ---------------- */
+async function finishTest(){
+  if(quiz.timerHandle) clearInterval(quiz.timerHandle);
+  const ids = quiz.ids;
+  const answers = quiz.answers;
+  let correctCount = 0;
+  const catTally = {};
+  const missed = [];
+
+  ids.forEach((id, i) => {
+    const q = QBYID[id];
+    const ans = answers[i];
+    const isCorrect = ans === q.correct;
+    if(isCorrect) correctCount++;
+    catTally[q.cat] = catTally[q.cat] || {correct:0,total:0};
+    catTally[q.cat].total++;
+    if(isCorrect) catTally[q.cat].correct++;
+
+    if(!progress.catStats[q.cat]) progress.catStats[q.cat] = {correct:0,total:0};
+    progress.catStats[q.cat].total++;
+    if(isCorrect) progress.catStats[q.cat].correct++;
+
+    if(!isCorrect){
+      missed.push({id, q, ans});
+      if(!progress.wrongIds.includes(id)) progress.wrongIds.push(id);
+    } else {
+      progress.wrongIds = progress.wrongIds.filter(w => w !== id);
+    }
+  });
+
+  // streak + history (only counted for non-review full tests, but we still log review sessions in history without touching streak twice)
+  const today = todayStr();
+  if(!quiz.isReview){
+    if(progress.lastDate === today){
+      // already played today, streak unchanged
+    } else {
+      const y = new Date(); y.setDate(y.getDate()-1);
+      const yesterday = y.toISOString().slice(0,10);
+      progress.streak = (progress.lastDate === yesterday) ? (progress.streak||0)+1 : 1;
+      progress.lastDate = today;
+    }
+    progress.testsTaken = (progress.testsTaken||0)+1;
+  }
+  progress.bestScore = Math.max(progress.bestScore||0, correctCount);
+  progress.history = progress.history || [];
+  progress.history.push({date: today, correct: correctCount, total: ids.length, mode: quiz.isReview ? "revision" : quiz.mode});
+  if(progress.history.length > 30) progress.history = progress.history.slice(-30);
+
+  await saveProgress();
+  renderResults(correctCount, ids.length, catTally, missed);
+}
+
+function renderResults(correct, total, catTally, missed){
+  document.getElementById("view-quiz").hidden = true;
+  document.getElementById("view-results").hidden = false;
+
+  const points = correct*2, maxPoints = total*2;
+  document.getElementById("resScore").innerHTML = points+"<span>/"+maxPoints+"</span>";
+  document.getElementById("resSub").textContent = correct+" bonnes réponses sur "+total;
+
+  const banner = document.getElementById("streakBanner");
+  if(!quiz.isReview){
+    banner.hidden = false;
+    document.getElementById("streakText").textContent = progress.streak > 1
+      ? `Série de ${progress.streak} jours d'affilée`
+      : "Premier jour de la série — reviens demain pour continuer !";
+  } else {
+    banner.hidden = true;
+  }
+
+  const catBox = document.getElementById("catBreakdown");
+  catBox.innerHTML = "";
+  Object.keys(catTally).sort().forEach(cat => {
+    const t = catTally[cat];
+    const pct = Math.round((t.correct/t.total)*100);
+    const row = document.createElement("div");
+    row.className = "catbar-row";
+    row.innerHTML = `
+      <div class="catbar-label">${CATS[cat].label}</div>
+      <div class="catbar-track"><div class="catbar-fill" style="width:${pct}%; background:${CATS[cat].color}"></div></div>
+      <div class="catbar-frac mono">${t.correct}/${t.total}</div>`;
+    catBox.appendChild(row);
+  });
+
+  const reviewBox = document.getElementById("reviewList");
+  reviewBox.innerHTML = "";
+  if(missed.length === 0){
+    reviewBox.innerHTML = '<p class="empty-note">Sans faute ! Aucune question à revoir sur ce test.</p>';
+  } else {
+    missed.forEach(m => {
+      const item = document.createElement("div");
+      item.className = "review-item";
+      let optsHtml = "";
+      m.q.options.forEach((opt, i) => {
+        let cls = "";
+        if(i === m.q.correct) cls = "correct";
+        else if(i === m.ans) cls = "incorrect";
+        optsHtml += `<div class="review-opt ${cls}"><span class="opt-bubble" style="border-color:currentColor;">${i+1}</span><span>${opt}</span></div>`;
+      });
+      item.innerHTML = `<p class="review-q">${m.q.q}</p><div>${optsHtml}</div><div class="review-explain"><b>Corrigé —</b> ${m.q.exp}</div>`;
+      reviewBox.appendChild(item);
+    });
+  }
+
+  renderHome();
+}
+
+document.getElementById("btnHome2").addEventListener("click", () => {
+  document.getElementById("view-results").hidden = true;
+  document.getElementById("view-home").hidden = false;
+  renderHome();
+});
+document.getElementById("btnReplay").addEventListener("click", () => {
+  document.getElementById("view-results").hidden = true;
+  startTest(drawNewTestIds(50), currentMode, false);
+});
+
+/* ---------------- entry points ---------------- */
+document.getElementById("btnNewTest").addEventListener("click", () => {
+  startTest(drawNewTestIds(50), currentMode, false);
+});
+document.getElementById("btnReview").addEventListener("click", () => {
+  if(!(progress.wrongIds||[]).length) return;
+  const ids = shuffle(progress.wrongIds).slice(0, 50);
+  startTest(ids, "bachotage", true);
+});
+
+/* ---------------- boot ---------------- */
+initTheme();
+initProgress();
+</script>
+</body>
+</html>
